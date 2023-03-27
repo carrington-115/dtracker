@@ -30,6 +30,7 @@ const StyledIcons = styled.div`
 
   span {
     font-size: 12px;
+    font-family: Roboto;
     line-height: 16px;
     color: white;
   }
