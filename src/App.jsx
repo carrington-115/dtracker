@@ -3,32 +3,7 @@ import logo from "./assets/logo.png";
 import { Oval } from "react-loader-spinner";
 
 function App() {
-  return (
-    <WelcomeBar className="App">
-      <div className="container">
-        <h1>DTRACKER</h1>
-        <p>Powered by</p>
-        <div className="img-container">
-          <img src={logo} alt="logo" />
-        </div>
-        <div className="loading-spin">
-          <Oval
-            height={80}
-            width={80}
-            color="#4fa94d"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#4fa94d"
-            strokeWidth={5}
-            strokeWidthSecondary={5}
-          />
-        </div>
-        <h4>Coming soon.....</h4>
-      </div>
-    </WelcomeBar>
-  );
+  return <WelcomeBar className="App">NEW TEST</WelcomeBar>;
 }
 
 export default App;
