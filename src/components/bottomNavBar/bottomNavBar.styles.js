@@ -17,6 +17,14 @@ const StyledIcons = styled.div`
   justify-content: center;
   gap: 2px;
   cursor: pointer;
+  &:hover {
+    .icon-wrapper {
+      background-color: white;
+    }
+    span {
+      color: white;
+    }
+  }
 
   .icon-wrapper {
     display: flex;
@@ -25,14 +33,14 @@ const StyledIcons = styled.div`
     width: 64px;
     height: 30px;
     border-radius: 50px;
-    background-color: #fff;
+    background-color: transparent;
   }
 
   span {
     font-size: 12px;
     font-family: Roboto;
     line-height: 16px;
-    color: white;
+    color: black;
   }
 `;
 
