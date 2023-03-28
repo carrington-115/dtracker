@@ -1,7 +1,9 @@
 import "./App.css";
 import styled from "styled-components";
 
-function App() {
+
+
+function App() 
   return <WelcomeBar className="App">NEW TEST</WelcomeBar>;
 }
 
