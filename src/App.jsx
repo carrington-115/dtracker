@@ -1,14 +1,8 @@
 import "./App.css";
-import { HiOutlineCamera } from "react-icons/hi";
-import BottomNavBar from "./Components/bottomNavBar/bottomNavBar";
-import Button from "./Components/button/button";
 
-function App() {
-  return (
-    <div className="App">
-     
-    </div>
-  );
+function App() 
+  return <WelcomeBar className="App">NEW TEST</WelcomeBar>;
+
 }
 
 export default App;
