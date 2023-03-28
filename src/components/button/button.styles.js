@@ -33,9 +33,13 @@ const StyledButtonWrapper = styled.div`
     border-style: none;
     border-radius: 81.25px;
     padding: 16px 39px 16px 39px;
-
+    gap: 8px;
     .title {
       color: #fff;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
     }
   }
 
