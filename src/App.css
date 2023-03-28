@@ -1,4 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .App {
+    display: none;
+  }
 }
