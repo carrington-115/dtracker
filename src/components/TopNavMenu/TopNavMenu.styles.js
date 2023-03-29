@@ -81,7 +81,7 @@ const DrawerMenuNavigation = styled.div`
   align-items: flex-start;
   padding: 0.5cm 0.5cm;
   transform: ${(props) =>
-    props.show ? "translateX(0%)" : "translateX(-100%)"};
+    props.show ? "translateX(-5%)" : "translateX(-100%)"};
   transition: all 0.1s 250ms ease-out;
   .text-style {
     font-family: "Roboto";
