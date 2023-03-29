@@ -28,6 +28,7 @@ const TypographyStyle = styled.h1`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 18px;
   height: 195.76718139648438px;
   min-width: 236px;

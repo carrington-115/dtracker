@@ -8,6 +8,8 @@ const StyledButtomNav = styled.div`
   align-items: center;
   padding: 20px 4px;
   background-color: #6b766c;
+  position: fixed;
+  bottom: 0;
 `;
 
 const StyledIcons = styled.div`

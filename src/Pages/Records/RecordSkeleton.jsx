@@ -7,8 +7,9 @@ import Button from "../../Components/button/button";
 import TopNavMenu from "../../Components/TopNavMenu/TopNavMenu";
 import { CameraButtonContainer } from "../Dashboard/Dashboard.styles";
 import Card from "../../Components/RecordCard/Card";
+import CardSkeleton from "../../Components/RecordCard/CardSkeleton";
 
-const Record = () => {
+const RecordSkeleton = () => {
   return (
     <StyledRecordPage>
       <TopNavMenu />
@@ -29,15 +30,10 @@ const RecordList = () => {
   return (
     <RecordListWrapper>
       {new Array(92).fill("").map((_, idx) => (
-        <Card
-          key={idx}
-          imageLink={recordImg}
-          recordType="Tracking Record"
-          recordBody="Lorem ipsum dolor sit amet consectetur adipiscing elit, sed quis vel vitae potenti"
-        />
+        <CardSkeleton key={idx} />
       ))}
     </RecordListWrapper>
   );
 };
 
-export default Record;
+export default RecordSkeleton;
