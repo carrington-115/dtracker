@@ -13,7 +13,7 @@ function LastSteps() {
             <AiOutlineUnorderedList />
           </div>
           <select id="pet-select">
-            <option value="">--Please choose an option--</option>
+            <option value="">--Please choose a category--</option>
             <option value="waste collector">Waste collector</option>
             <option value="waste disposer">Waste disposers</option>
           </select>

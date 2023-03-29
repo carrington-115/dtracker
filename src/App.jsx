@@ -1,15 +1,11 @@
 import "./App.css";
 import styled from "styled-components";
-import Record from "./Pages/Records/Record";
-import RecordSkeleton from "./Pages/Records/RecordSkeleton";
 
-function App() {
-  return (
-    <div className="App">
-      <RecordSkeleton />
-    </div>
-  );
+function App() 
+  return <WelcomeBar className="App">NEW TEST</WelcomeBar>;
+
 }
+// name, variance, startIcon, endIcon, color, borderColor
 
 export default App;
 
