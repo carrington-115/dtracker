@@ -21,7 +21,7 @@ const Dashboard = () => {
       <TopNavMenu />
       <Header />
       <Profile profileImage={profileImage} name="John Doe" />
-      <BottomNavBar />
+
       <ButtonWrapper>
         <Button
           name="Start tracking"

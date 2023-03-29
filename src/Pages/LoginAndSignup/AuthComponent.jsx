@@ -1,6 +1,6 @@
 import React from "react";
 import LoginHeader from "../../components/Loginheader/LoginHeader";
-import { AuthComponentContainer, LoginPageLinks } from "./authcomponent.styles";
+import { AuthComponentContainer } from "./authcomponent.styles";
 import { Outlet } from "react-router-dom";
 
 function AuthComponent() {

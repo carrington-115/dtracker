@@ -8,13 +8,19 @@ import LoginContent from "./Pages/LoginAndSignup/LoginContent";
 import PersonalInfo from "./Pages/LoginAndSignup/signuppages/PersonalInfo";
 import AddressInfo from "./Pages/LoginAndSignup/signuppages/AddressInfo";
 import LastSteps from "./Pages/LoginAndSignup/signuppages/LastSteps";
+import Welcome from "./Pages/Welcome/Welcome";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import AppComponent from "./Pages/Appcomponent/AppComponent";
 
 function App() {
   return (
     <WelcomeBar className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<AuthComponent />} />
+          <Route path="/" element={<Welcome />} />
+          <Route path="app" element={<AppComponent />}>
+            <Route index element={<Dashboard />} />
+          </Route>
           <Route path="auth" element={<AuthComponent />}>
             <Route index element={<Login />} />
             <Route path="login" element={<LoginContent />} />
@@ -28,7 +34,6 @@ function App() {
       </Router>
     </WelcomeBar>
   );
-
 }
 // name, variance, startIcon, endIcon, color, borderColor
 
@@ -42,4 +47,3 @@ const WelcomeBar = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
