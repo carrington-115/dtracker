@@ -1,7 +1,6 @@
 import React from "react";
 import top_style from "../../assets/top-style.png";
-import { LoginHeaderContainer } from "./LoginHeader.styles.";
-import line from "../../assets/line.svg";
+import { LoginHeaderContainer } from "./LoginHeader.styles";
 
 function LoginHeader() {
   return (
