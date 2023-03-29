@@ -28,6 +28,7 @@ function App() {
       </Router>
     </WelcomeBar>
   );
+
 }
 // name, variance, startIcon, endIcon, color, borderColor
 
@@ -41,3 +42,4 @@ const WelcomeBar = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
