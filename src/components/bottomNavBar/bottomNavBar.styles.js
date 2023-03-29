@@ -13,6 +13,8 @@ const StyledButtomNav = styled.div`
   right: 0;
   bottom: 0;
   background-color: #6b766c;
+  position: fixed;
+  bottom: 0;
 `;
 
 const StyledIcons = styled.div`
