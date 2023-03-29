@@ -1,11 +1,13 @@
 import React from "react";
 import top_style from "../../assets/top-style.png";
-import { LoginHeaderContainer } from "./LoginHeader.styles.";
+import { LoginHeaderContainer } from "./LoginHeader.styles";
 
 function LoginHeader() {
   return (
     <LoginHeaderContainer>
-      <img src={top_style} alt="top-style-svg" />
+      <div className="badge">
+        <img src={top_style} alt="top-style-svg" />
+      </div>
     </LoginHeaderContainer>
   );
 }

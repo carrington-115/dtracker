@@ -1,0 +1,113 @@
+import styled from "styled-components";
+
+const LoginContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .login-head {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5cm 0;
+    p {
+      font-weight: 400px;
+      font-size: 16px;
+      margin: 0 16px;
+    }
+    .line {
+      width: 100px;
+      hr {
+        height: 1px;
+        width: 100%;
+      }
+    }
+  }
+  form {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .input-field {
+      display: flex;
+      align-items: center;
+      padding: 23px 27px;
+      border: 1px solid #226e27;
+      border-radius: 15px;
+      width: 100%;
+      color: #226e27;
+      margin: 0.25cm 0;
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
+      }
+      input {
+        border: none;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        width: 90%;
+        ::placeholder {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .forgot-psd {
+      color: #226e27;
+      font-weight: normal;
+      cursor: pointer;
+      margin-bottom: 0.5cm;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+    .btns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      button {
+        margin-bottom: 0.5cm;
+      }
+    }
+  }
+
+  .external-login-btns {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 0 2cm 0;
+    .btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 5px;
+      border: 1px solid #226e27;
+      border-radius: 50px;
+      margin: 0.25cm 0;
+      cursor: pointer;
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.25cm;
+        color: #226e27;
+      }
+      span {
+        font-weight: 400;
+        font-size: 14px;
+        color: #226e27;
+      }
+    }
+  }
+`;
+
+export { LoginContentContainer };
