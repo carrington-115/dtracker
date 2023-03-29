@@ -11,16 +11,23 @@ import LastSteps from "./Pages/LoginAndSignup/signuppages/LastSteps";
 import Welcome from "./Pages/Welcome/Welcome";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AppComponent from "./Pages/Appcomponent/AppComponent";
-
+import TopNavMenu from "./Components/TopNavMenu/TopNavMenu";
+import BottomNavBar from "./Components/bottomNavBar/bottomNavBar";
+import Record from "./Pages/Records/Record";
+import Track from "./Pages/Track WireFrame/Track";
 function App() {
   return (
     <WelcomeBar className="App">
       <Router>
+        <TopNavMenu />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="app" element={<AppComponent />}>
             <Route index element={<Dashboard />} />
           </Route>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="record" element={<Record />} />
+          <Route path="track" element={<Track />} />
           <Route path="auth" element={<AuthComponent />}>
             <Route index element={<Login />} />
             <Route path="login" element={<LoginContent />} />
@@ -31,6 +38,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
+        <BottomNavBar />
       </Router>
     </WelcomeBar>
   );

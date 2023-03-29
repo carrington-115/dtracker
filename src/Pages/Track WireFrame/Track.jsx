@@ -1,18 +1,17 @@
 import React from "react";
-import BottomNavBar from "../../Components/bottomNavBar/bottomNavBar";
 import Button from "../../Components/button/button";
-import TopNavMenu from "../../Components/TopNavMenu/TopNavMenu";
 import { HiOutlineCamera } from "react-icons/hi";
 import {
   StyledTrackPage,
   TypographyStyle,
   ButtonWrapper,
 } from "./Track.styles";
+import Fab from "../../components/FAB/Fab";
+import ExtendedFab from "../../components/FAB/ExtendedFab";
 
 const Track = () => {
   return (
     <StyledTrackPage>
-      <TopNavMenu />
       <Typography />
       <ButtonWrapper>
         <Button
@@ -35,14 +34,8 @@ const Track = () => {
           color="#226E27"
         />
       </ButtonWrapper>
-      <div className="outlined-request_button">
-        <Button
-          name="Want to send a request?"
-          variance="outlined"
-          borderColor="#226E27"
-        />
-      </div>
-      <BottomNavBar />
+
+      <Fab />
     </StyledTrackPage>
   );
 };
