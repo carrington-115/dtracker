@@ -6,6 +6,7 @@ const StyledRecordPage = styled.div`
   justify-content: center;
   align-items: center;
   gap: 25px;
+  padding: 1cm 0;
 `;
 
 const RecordListWrapper = styled.div`

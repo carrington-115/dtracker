@@ -123,7 +123,7 @@ const DrawerMenuNavigation = styled.div`
   .nav-page-link {
     display: flex;
     align-items: center;
-    padding: 12px 20px;
+    padding: 12px 12px 12px 28px;
     width: 280px;
     margin: 0.25cm 0;
     border-radius: 50px;

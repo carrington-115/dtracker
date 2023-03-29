@@ -14,11 +14,11 @@ import {
   CameraButtonContainer,
   TypographyStyle,
 } from "./Dashboard.styles";
+import Fab from "../../components/FAB/Fab";
 
 const Dashboard = () => {
   return (
     <DashboardWrapper>
-      <TopNavMenu />
       <Header />
       <Profile profileImage={profileImage} name="John Doe" />
 
@@ -36,15 +36,9 @@ const Dashboard = () => {
           color="#4D724F"
         />
       </ButtonWrapper>
-      <CameraButtonContainer>
-        <Button
-          variance="logo"
-          name={<HiOutlineCamera size={42} color="#fff" />}
-          color="#226E27"
-        />
-      </CameraButtonContainer>
+
       <Typography />
-      <BottomNavBar />
+      <Fab />
     </DashboardWrapper>
   );
 };
@@ -52,18 +46,16 @@ const Dashboard = () => {
 const Profile = ({ profileImage, name }) => {
   return (
     <ProfileWarpper>
-      <img src={profileImage} alt="profile_img" />
+      <div className="image">
+        <img src={profileImage} alt="profile_img" />
+      </div>
       <div className="profile-content">
         <div className="profile-text_content">
           <h1 className="profile-username">{name}</h1>
           <p className="profile-title">You are now a DTracker</p>
         </div>
-        <div className="profile-button_container">
-          <Button
-            variance="contained"
-            name="view your record"
-            color="#B9DEBB"
-          />
+        <div className="profile-button-container">
+          <button>View your record</button>
         </div>
       </div>
     </ProfileWarpper>
