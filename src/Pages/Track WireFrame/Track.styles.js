@@ -6,6 +6,7 @@ const StyledTrackPage = styled.div`
   justify-content: center;
   align-items: center;
   gap: 45px;
+  margin-bottom: 4cm;
 
   .outlined-request_button {
     padding: 55px 0;

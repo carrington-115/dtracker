@@ -7,6 +7,11 @@ const StyledButtomNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px 4px;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #6b766c;
 `;
 

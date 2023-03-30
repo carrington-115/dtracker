@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
 const ProfileWarpper = styled.div`
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 60px;
+  /* gap: 20px; */
+  justify-content: space-between;
   padding: 20px 16px;
-
-  img {
-    border-radius: 50%;
-    height: 140px;
-    width: 140px;
+  .image {
+    width: 30vw;
+    img {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+    }
   }
 
   .profile-username {
@@ -33,8 +36,23 @@ const ProfileWarpper = styled.div`
     text-align: center;
   }
 
-  .profile-button_container {
-    scale: 1;
+  .profile-button-container {
+    button {
+      font-size: 14px;
+      /* padding: 10px 24px; */
+      width: 37vw;
+      padding: 10px 0;
+      background: #b9debb;
+      border-radius: 50px;
+      color: #233524;
+      border: 1px solid #b9debb;
+      cursor: pointer;
+    }
+  }
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 `;
 
@@ -44,6 +62,7 @@ const DashboardWrapper = styled.div`
   gap: 15px;
   flex-direction: column;
   align-items: center;
+  margin: 1cm 0;
 `;
 
 const StyledHeader = styled.div`
