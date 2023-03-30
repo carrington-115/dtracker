@@ -104,6 +104,12 @@ const TypographyStyle = styled.h1`
   color: #6b766c;
 `;
 
+const ImageContainer = styled.div`
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+`;
+
 export {
   ProfileWarpper,
   DashboardWrapper,
@@ -111,4 +117,5 @@ export {
   ButtonWrapper,
   CameraButtonContainer,
   TypographyStyle,
+  ImageContainer,
 };
