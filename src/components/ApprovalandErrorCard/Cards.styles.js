@@ -80,6 +80,47 @@ const CardContainer = styled.div`
   }
 `;
 
+const ErrorCardContainer = styled(CardContainer)`
+  z-index: 12;
+  .top-close-btn {
+    display: flex;
+    width: 100%;
+    align-items: left;
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #226322;
+      border-radius: 50%;
+      cursor: pointer;
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: #226322;
+      }
+    }
+  }
+  .message-icon-container {
+    .icon {
+      border-color: #c64700;
+      svg {
+        fill: #c64700;
+      }
+    }
+  }
+  .btns {
+    .first-action-btn {
+      background: #c64700;
+    }
+    .second-action-btn {
+      border-color: #c64700;
+      color: #c64700;
+    }
+  }
+`;
+
 const Backdrop = styled.div`
   position: fixed;
   top: 0;
@@ -90,4 +131,4 @@ const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export { CardContainer, Backdrop };
+export { CardContainer, Backdrop, ErrorCardContainer };
