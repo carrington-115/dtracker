@@ -7,7 +7,6 @@ const NotificationContainer = styled.div`
   align-items: center;
   gap: 25px;
   padding: 1cm 0;
-  border: 1px solid black;
 `;
 
 const NotificationListWrapper = styled.div`

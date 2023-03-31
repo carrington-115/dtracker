@@ -36,6 +36,9 @@ const ButtonWrapper = styled.div`
   left: 75px;
   top: 289px;
   border-radius: 0px;
+  .FAB {
+    display: none;
+  }
 `;
 
 export { StyledTrackPage, TypographyStyle, ButtonWrapper };
