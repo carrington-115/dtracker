@@ -5,14 +5,15 @@ const ButtonContainer = styled.div`
   border-radius: 28px;
   width: 96px;
   height: 96px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
   bottom: 2.5cm;
   right: 16px;
-  z-index: 5;
+  /* z-index: 2; */
   background: #226e27;
+  cursor: pointer;
   .icon {
     svg {
       width: 36px;

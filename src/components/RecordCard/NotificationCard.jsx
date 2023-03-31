@@ -1,12 +1,12 @@
 import React from "react";
-import { CardContainer } from "./Card.styles";
-import delete_icon from "../../assets/delete.svg";
+import { NotificationCardContainer } from "./Card.styles";
+import { IoMdNotifications } from "react-icons/io";
 
-function Card(props) {
+function NotificationCard(props) {
   return (
-    <CardContainer>
+    <NotificationCardContainer>
       <div className="img-container">
-        <img src={props.imageLink} alt="record-image" />
+        <IoMdNotifications />
       </div>
       <div className="text-content">
         <h2 className="title">{props.recordType}</h2>
@@ -19,13 +19,10 @@ function Card(props) {
             <p>12/12/2000</p>
             <p>5:00 PM</p>
           </div>
-          <div className="third">
-            <img src={delete_icon} alt="delete_icon" />
-          </div>
         </div>
       </div>
-    </CardContainer>
+    </NotificationCardContainer>
   );
 }
 
-export default Card;
+export default NotificationCard;

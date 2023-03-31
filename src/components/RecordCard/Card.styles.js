@@ -70,4 +70,42 @@ const CardContainer = styled.div`
   }
 `;
 
-export { CardContainer };
+const NotificationCardContainer = styled(CardContainer)`
+  background-color: white;
+  color: black;
+  width: 90%;
+  padding: 0.5cm 0;
+  justify-content: center;
+  gap: 0.25cm;
+  cursor: pointer;
+  border: 1px solid black;
+
+  .img-container {
+    width: 20%;
+    padding: 0.4cm;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 80%;
+      height: 80%;
+    }
+  }
+  .text-content {
+    color: black;
+    width: 60%;
+    .alt-components {
+      color: black;
+      .first {
+        button {
+          color: black;
+          border-color: black;
+        }
+      }
+    }
+  }
+`;
+
+export { CardContainer, NotificationCardContainer };
