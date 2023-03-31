@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const NavContainer = styled.nav`
   max-width: 100vw;
-  display: flex;
+  display: ${(props) => (props.displayMenu ? "flex" : "none")};
   align-items: center;
   justify-content: space-around;
   padding: 8px;

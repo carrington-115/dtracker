@@ -1,20 +1,20 @@
 import React from "react";
-import BottomNavBar from "../../Components/bottomNavBar/bottomNavBar";
 import Button from "../../Components/button/button";
-import TopNavMenu from "../../Components/TopNavMenu/TopNavMenu";
 import profileImage from "../../assets/profile.png";
 import { HiOutlineCamera } from "react-icons/hi";
 import { GoRequestChanges } from "react-icons/go";
-
+import { TiTick } from "react-icons/ti";
+import { AiFillWarning } from "react-icons/ai";
 import {
   ProfileWarpper,
   DashboardWrapper,
   StyledHeader,
   ButtonWrapper,
-  CameraButtonContainer,
   TypographyStyle,
 } from "./Dashboard.styles";
 import Fab from "../../components/FAB/Fab";
+import ApprovalCard from "../../components/ApprovalandErrorCard/ApprovalCard";
+import ErrorCards from "../../components/ApprovalandErrorCard/ErrorCards";
 
 const Dashboard = () => {
   return (
@@ -39,6 +39,12 @@ const Dashboard = () => {
 
       <Typography />
       <Fab />
+      <ErrorCards
+        messageIcon={<AiFillWarning />}
+        message="Are you sure you want to delete this record?"
+        firstButtonName="Yes delete this record"
+        secondButtonName="Cancel"
+      />
     </DashboardWrapper>
   );
 };

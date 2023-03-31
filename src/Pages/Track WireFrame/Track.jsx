@@ -7,7 +7,8 @@ import {
   ButtonWrapper,
 } from "./Track.styles";
 import Fab from "../../components/FAB/Fab";
-import ExtendedFab from "../../components/FAB/ExtendedFab";
+import TrackFormCard from "../../components/TrackFormCard/TrackFormCard";
+import { Backdrop } from "../../components/TrackFormCard/trackformcard.styles";
 
 const Track = () => {
   return (
@@ -34,8 +35,9 @@ const Track = () => {
           color="#226E27"
         />
       </ButtonWrapper>
-
-      <Fab />
+      <TrackFormCard />
+      <Backdrop />
+      <div className="FAB"></div>
     </StyledTrackPage>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DrawerMenuNavigation,
   NavContainer,
@@ -18,13 +18,7 @@ import { RiFeedbackLine } from "react-icons/ri";
 import { FiHelpCircle } from "react-icons/fi";
 
 function TopNavMenu() {
-  const [showBar, setShowBar] = useState(false);
-  const callShowBar = () => {
-    setShowBar(!showBar);
-  };
-  const callCloseBar = () => {
-    setShowBar(false);
-  };
+  // the start of the component;
   return (
     <NavContainer show={showBar}>
       <div className="icon-menu" onClick={callShowBar}>
