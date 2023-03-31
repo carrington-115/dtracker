@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const NavContainer = styled.nav`
@@ -8,7 +8,6 @@ const NavContainer = styled.nav`
   justify-content: space-around;
   padding: 8px;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
-
   .right-icons {
     display: flex;
     align-items: center;
@@ -75,11 +74,13 @@ const DrawerMenuNavigation = styled.div`
   background: #ffffff;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
   border-radius: 0px 20px 20px 0px;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0.5cm 0.5cm;
+  padding-left: 1cm;
+
   transform: ${(props) =>
     props.show ? "translateX(-5%)" : "translateX(-100%)"};
   transition: all 0.1s 250ms ease-out;
@@ -120,18 +121,19 @@ const DrawerMenuNavigation = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .nav-page-link {
+  .nav-page-links {
     display: flex;
     align-items: center;
     padding: 12px 12px 12px 28px;
-    width: 280px;
+    width: 60vw;
     margin: 0.25cm 0;
     border-radius: 50px;
     cursor: pointer;
+    text-decoration: none;
+    gap: 0.5cm;
     svg {
       width: 24px;
       height: 24px;
-      margin-right: 1cm;
     }
     span {
       font-size: 20px;
@@ -140,6 +142,10 @@ const DrawerMenuNavigation = styled.div`
       background: #b9debb;
     }
   }
+`;
+
+const NavPageLinks = styled(Link)`
+  color: black;
 `;
 
 const Backdrop = styled.div`
@@ -154,4 +160,4 @@ const Backdrop = styled.div`
   z-index: ${(props) => (props.show ? "2" : "-1")};
 `;
 
-export { NavContainer, DrawerMenuNavigation, Backdrop };
+export { NavContainer, DrawerMenuNavigation, NavPageLinks, Backdrop };

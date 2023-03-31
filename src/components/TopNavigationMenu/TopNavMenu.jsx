@@ -3,6 +3,7 @@ import {
   DrawerMenuNavigation,
   NavContainer,
   Backdrop,
+  NavPageLinks,
 } from "./TopNavMenu.styles";
 import { AiOutlineMenu } from "react-icons/ai";
 import logo from "../../assets/logo.svg";
@@ -16,11 +17,35 @@ import { HiOutlineCamera } from "react-icons/hi";
 import { GoRequestChanges } from "react-icons/go";
 import { RiFeedbackLine } from "react-icons/ri";
 import { FiHelpCircle } from "react-icons/fi";
+import { useLocation } from "react-router-dom";
 
 function TopNavMenu() {
   // the start of the component;
+  let location = useLocation();
+  let pageLocation = `${location.pathname}`;
+  const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    if (
+      pageLocation == `/auth` ||
+      pageLocation === "/" ||
+      pageLocation === "/auth/login" ||
+      pageLocation === "/auth/signup"
+    ) {
+      setShowMenu(false);
+    } else {
+      setShowMenu(true);
+    }
+  }, [pageLocation, showMenu]);
+  const [showBar, setShowBar] = useState(false);
+  function callShowBar() {
+    setShowBar(true);
+  }
+  function callCloseBar() {
+    setShowBar(false);
+  }
   return (
-    <NavContainer show={showBar}>
+    <NavContainer show={showBar} displayMenu={showMenu}>
       <div className="icon-menu" onClick={callShowBar}>
         <AiOutlineMenu className="menu" />
       </div>
@@ -48,27 +73,27 @@ function TopNavMenu() {
           </div>
         </div>
         <div className="menu-links">
-          <div className="nav-page-link">
+          <NavPageLinks to="/" className="nav-page-links">
             <GrHomeRounded /> <span>Dashboard</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <HiOutlineCamera /> <span>Track</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <GoRequestChanges /> <span>Requests</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <AiOutlineFolder /> <span>Records</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <RiFeedbackLine /> <span>Feedback</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <IoMdNotificationsOutline /> <span>Notifications</span>
-          </div>
-          <div className="nav-page-link">
+          </NavPageLinks>
+          <NavPageLinks to="/" className="nav-page-links">
             <FiHelpCircle /> <span>Help</span>
-          </div>
+          </NavPageLinks>
         </div>
       </DrawerMenuNavigation>
     </NavContainer>

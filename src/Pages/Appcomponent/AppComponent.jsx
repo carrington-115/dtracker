@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import BottomNavBar from "../../Components/bottomNavBar/bottomNavBar";
-import TopNavMenu from "../../Components/TopNavMenu/TopNavMenu";
+import BottomNavBar from "../../components/BottomNavBar/bottomNavBar";
+import TopNavMenu from "../../components/TopNavigationMenu/TopNavMenu";
 import { ComponentContainer } from "./AppComponent.styles";
 
 function AppComponent() {

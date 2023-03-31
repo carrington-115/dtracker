@@ -3,7 +3,22 @@ import { WelcomeContainer } from "./welcome.styles";
 import dtracker_logo from "../../assets/logo.svg";
 import { Oval } from "react-loader-spinner";
 import swims_logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 function Welcome() {
+  const [ready, setReady] = useState(false);
+  let navigate = useNavigate();
+  function waitWelcome() {
+    setReady(true);
+  }
+  setTimeout(() => {
+    waitWelcome();
+    if (ready === true) {
+      navigate("/auth");
+    }
+  }, 3000);
+
   return (
     <WelcomeContainer>
       <div className="welcome-content">

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledButtomNav = styled.div`
   box-sizing: border-box;
   width: 100%;
-  display: flex;
+  display: ${(props) => (props.displayMenu ? "flex" : "none")};
   justify-content: space-between;
   align-items: center;
   padding: 20px 4px;

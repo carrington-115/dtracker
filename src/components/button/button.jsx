@@ -9,12 +9,14 @@ const Button = ({
   endIcon,
   color,
   borderColor,
+  setFuncAction,
 }) => {
   return (
     <StyledButtonWrapper>
       <button
         type="button"
         className={variance}
+        onClick={setFuncAction}
         style={{
           backgroundColor: color,
           border: `2px solid ${borderColor}`,

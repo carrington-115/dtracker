@@ -2,7 +2,7 @@ import React from "react";
 import recordImg from "../../assets/record_image.png"
 import { StyledRecordPage, RecordListWrapper } from "./Record.styles";
 import { HiOutlineCamera } from "react-icons/hi";
-import BottomNavBar from "../../Components/bottomNavBar/bottomNavBar";
+import BottomNavBar from "../../components/BottomNavBar/bottomNavBar";
 import Button from "../../Components/button/button";
 import { CameraButtonContainer } from "../Dashboard/Dashboard.styles";
 import Card from "../../Components/RecordCard/Card";
