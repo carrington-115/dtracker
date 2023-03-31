@@ -6,7 +6,11 @@ import Button from "../../components/button/button";
 import { BsGoogle } from "react-icons/bs";
 import { ImFacebook } from "react-icons/im";
 import { FaYahoo } from "react-icons/fa";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
 import { auth } from "../../Firebase/Firebase.config";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +21,15 @@ function LoginContent() {
   function handleSignIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => navigate("/dashboard"))
+      .catch((err) => console.log(err.message));
+  }
+
+  function handleSignInWithPopUp() {
+    let provider = new GoogleAuthProvider();
+    signInWithRedirect(auth, provider)
+      .then(() => {
+        navigate("/dashboard");
+      })
       .catch((err) => console.log(err.message));
   }
   return (
@@ -82,7 +95,7 @@ function LoginContent() {
         </div>
       </div>
       <div className="external-login-btns">
-        <div className="btn">
+        <div className="btn" onClick={handleSignInWithPopUp}>
           <BsGoogle />
           <span>Sign in with Google</span>
         </div>
