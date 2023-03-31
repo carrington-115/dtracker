@@ -81,6 +81,7 @@ function LoginContent() {
             borderColor="#226e27"
             name="Sign up instead?"
             textColor="#226e27"
+            setFuncAction={() => navigate("/auth/signup")}
           />
         </div>
       </form>

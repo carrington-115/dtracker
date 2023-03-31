@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ErrorCardContainer } from "./Cards.styles";
 import { BiArrowBack } from "react-icons/bi";
@@ -10,11 +10,12 @@ function ErrorCards({
   secondButtonAction,
   firstButtonName,
   secondButtonName,
+  cardState,
 }) {
   return (
-    <MainContainer>
-      <ErrorCardContainer>
-        <div className="top-close-btn">
+    <MainContainer show={cardState}>
+      <ErrorCardContainer show={cardState}>
+        <div className="top-close-btn" onClick={secondButtonAction}>
           <div className="icon">{<BiArrowBack />}</div>
         </div>
         <div className="message-icon-container">
@@ -32,7 +33,7 @@ function ErrorCards({
           </button>
         </div>
       </ErrorCardContainer>
-      <div className="backdrop" />
+      <div className="backdrop" onClick={secondButtonAction} />
     </MainContainer>
   );
 }
@@ -40,7 +41,7 @@ function ErrorCards({
 export default ErrorCards;
 
 const MainContainer = styled.div`
-  display: flex;
+  display: ${(props) => (props.show ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   position: fixed;

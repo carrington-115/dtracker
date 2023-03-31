@@ -72,6 +72,7 @@ function Login() {
         color="#226E27"
         borderColor="#226E27"
         name="Create your Account"
+        setFuncAction={() => navigate("/auth/signup")}
       />
     </LoginContainer>
   );

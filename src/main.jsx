@@ -8,8 +8,8 @@ import { store } from "./app/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-  <SkeletonTheme>
-    <App />
-  </SkeletonTheme>
+    <SkeletonTheme>
+      <App />
+    </SkeletonTheme>
   </Provider>
 );
