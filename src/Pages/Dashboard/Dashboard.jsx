@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../Components/button/button";
+import Button from "../../components/button/button";
 import profileImage from "../../assets/profile.png";
 import { HiOutlineCamera } from "react-icons/hi";
 import { GoRequestChanges } from "react-icons/go";

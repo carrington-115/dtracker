@@ -15,7 +15,9 @@ const BottomNavBar = () => {
       pageLocation == `/auth` ||
       pageLocation === "/" ||
       pageLocation === "/auth/login" ||
-      pageLocation === "/auth/signup"
+      pageLocation === "/auth/signup" ||
+      pageLocation === "/auth/signup/address-information" ||
+      pageLocation === "/auth/signup/last-steps"
     ) {
       setShowMenu(false);
     } else {
