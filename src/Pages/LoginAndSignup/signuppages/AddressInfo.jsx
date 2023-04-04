@@ -44,26 +44,26 @@ function AddressInfo() {
   });
 
   // getting the user and setting the firestore database location and function
-  let user = auth.currentUser;
-  console.log(user.uid);
-  let location = doc(firestoreDatabase, "profile", `${user.uid}`); // the database location to store the data
-  let data = {
-    username: name,
-    phonenumber: number,
-    country: country,
-    city: city,
-    quarter: quarter,
-  };
-  function handleSendUserProfileData(sendingLocation, sendingData) {
-    setDoc(sendingLocation, sendingData);
+
+  function handleSendUserProfileData() {
+    let user = auth.currentUser;
+    let location = doc(firestoreDatabase, "profile", `${user.uid}`); // the database location to store the data
+    let data = {
+      username: name,
+      phonenumber: number,
+      country: country,
+      city: city,
+      quarter: quarter,
+    };
+    setDoc(location, data);
   }
 
   // function to handle submitting the form
-  async function handleFormSubmit() {
+  function handleFormSubmit() {
     if (checkInfo === true) {
-      await handleSendUserProfileData(location, data);
-      navigate("/auth/signup/last-steps");
       setErrorCard(false);
+      handleSendUserProfileData();
+      navigate("/auth/signup/last-steps");
     } else {
       setErrorCard(true);
     }
