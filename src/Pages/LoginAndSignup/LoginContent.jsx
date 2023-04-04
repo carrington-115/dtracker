@@ -15,6 +15,15 @@ import { auth } from "../../Firebase/Firebase.config";
 import { useNavigate } from "react-router-dom";
 
 function LoginContent() {
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/dashboard");
+      } else {
+        navigate("/auth");
+      }
+    });
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();

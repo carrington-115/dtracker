@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import checkReducer from "../features/userAuthentication/checkSlice";
+import personalReducer from "../features/profile/personalInfoSlice";
+import addressReducer from "../features/profile/addressInfoSlice";
 
 export const store = configureStore({
   reducer: {
-    check: checkReducer,
+    personal: personalReducer,
+    address: addressReducer,
   },
 });
