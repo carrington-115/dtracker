@@ -20,7 +20,7 @@ function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // navigate("/dashboard");
+        navigate("/dashboard");
       } else {
         navigate("/auth");
       }

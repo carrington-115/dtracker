@@ -40,7 +40,7 @@ function LastSteps() {
 
   async function handleSubmitLastForm() {
     if (checkInfo === true) {
-      await setDoc(location, data);
+      await setDoc(location, data, { merge: true });
       navigate("/dashboard");
     } else {
       setErrorCard(true);
