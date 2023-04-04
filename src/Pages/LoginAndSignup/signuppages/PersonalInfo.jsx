@@ -8,16 +8,22 @@ import ErrorCards from "../../../components/ApprovalandErrorCard/ErrorCards";
 import { useNavigate } from "react-router-dom";
 
 // pulling the firebase imports
-import { auth, firestoreDatabase } from "../../../Firebase/Firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { auth } from "../../../Firebase/Firebase.config";
+// react router dom files
+import { useDispatch } from "react-redux";
+
+import {
+  storeUserName,
+  storePhoneNumber,
+  setFormDone,
+} from "../../../features/profile/personalInfoSlice";
 
 function PersonalInfo() {
   // setting form containers
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(+237);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [firstPassword, setFirstPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
   const [checkInfo, setCheckInfo] = useState(false);
@@ -25,29 +31,12 @@ function PersonalInfo() {
 
   // router navigation object
   const navigate = useNavigate();
-  let user = auth.currentUser;
+  let dispatch = useDispatch();
 
-  // initialize firestore database
-
-  const handleSubmitData = async () => {
-    let dataLocation = doc(firestoreDatabase, "community", user.uid);
-    let data = {
-      name: `${firstName} ${lastName}`,
-      phone: `${phoneNumber}`,
-    };
-    await setDoc(dataLocation, data);
-    try {
-      (res) => console.log(res);
-    } catch {
-      (err) => console.log(err.message);
-    }
-  };
-
-  // this is a function to check if all the data has been entered
   useEffect(() => {
+    console.log(checkInfo);
     if (
-      firstName === "" ||
-      lastName === "" ||
+      fullName === "" ||
       email === "" ||
       phoneNumber === 237 ||
       firstPassword === "" ||
@@ -57,7 +46,7 @@ function PersonalInfo() {
     } else {
       setCheckInfo(true);
     }
-  }, [firstName, lastName, email, phoneNumber, firstPassword, secondPassword]);
+  });
 
   function getPassword(p1, p2) {
     if (p1 == p2) {
@@ -69,9 +58,11 @@ function PersonalInfo() {
   }
   function handleSubmitForm() {
     let password = getPassword(firstPassword, secondPassword);
-    console.log(password);
     if (checkInfo === true && firstPassword === secondPassword) {
       setErrorCard(false);
+      dispatch(setFormDone());
+      dispatch(storeUserName(fullName));
+      dispatch(storePhoneNumber(phoneNumber));
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           navigate("/auth/signup/address-information");
@@ -79,7 +70,7 @@ function PersonalInfo() {
         .catch(() => {
           (err) => console.log(err.message);
         });
-      handleSubmitData();
+      navigate("/auth/signup/address-information");
     } else {
       setErrorCard(true);
     }
@@ -91,17 +82,9 @@ function PersonalInfo() {
         <div className="input-field">
           <input
             type="text"
-            placeholder="First name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div className="input-field">
-          <input
-            type="text"
-            placeholder="Last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Full name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
           />
         </div>
         <div className="input-field">

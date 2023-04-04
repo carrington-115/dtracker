@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/button/button";
 import { LoginContainer } from "./Login.styles";
 import { BsGoogle } from "react-icons/bs";
@@ -6,18 +6,32 @@ import { ImFacebook } from "react-icons/im";
 import { FaYahoo } from "react-icons/fa";
 import { auth } from "../../Firebase/Firebase.config";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithRedirect,
+} from "firebase/auth";
 
 function Login() {
   let navigate = useNavigate();
+  let user = auth.currentUser;
+  console.log(user);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // navigate("/dashboard");
+      } else {
+        navigate("/auth");
+      }
+    });
+  });
 
   // setting the google sign in credentials
   const provider = new GoogleAuthProvider();
   const signinWithGoogle = () => {
     signInWithRedirect(auth, provider)
-      .then(() => {
-        navigate("/dashboard");
-      })
+      .then(() => {})
       .catch((error) => {
         console.log(error.message);
       });

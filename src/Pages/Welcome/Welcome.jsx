@@ -4,48 +4,26 @@ import dtracker_logo from "../../assets/logo.svg";
 import { Oval } from "react-loader-spinner";
 import swims_logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { auth } from "../../Firebase/Firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setUserStateActive,
-  setUserStateInactive,
-  selectCheck,
-} from "../../features/userAuthentication/checkSlice";
 
-// start of the function
 function Welcome() {
-  // initializing variables, states, and constants for this page
-  const [ready, setReady] = useState(false); // to check if the site is online and passing
-  const [userVerification, setUserVerification] = useState(false); // State to verify if the user has an account
+  // user authentication states and settings
   let navigate = useNavigate();
 
-  // setting redux state managements hooks
-  const dispatch = useDispatch();
-  let checkState = useSelector(selectCheck);
-
-  // getting the user's data
-  let user = auth.currentUser;
-
-  // function to verify the user status account
+  // function to verify the user status before routing to the login or dashboard page
   useEffect(() => {
     setTimeout(() => {
-      if (user != null) {
-        setUserVerification(true);
-        dispatch(setUserStateActive);
-        navigate("/dashboard");
-      } else {
-        setUserVerification(false);
-        dispatch(setUserStateInactive);
-        navigate("/auth");
-      }
-    }, 2000);
+      onAuthStateChanged(auth, (user) => {
+        console.log(user);
+        if (user) {
+          navigate("/dashboard");
+        } else {
+          navigate("/auth");
+        }
+      });
+    }, 1000);
   });
-
-  // setting ready by checking if the content is loaded
-  console.log(`ready: ${ready} and check: ${checkState}`);
-  console.log(user);
 
   return (
     <WelcomeContainer>
