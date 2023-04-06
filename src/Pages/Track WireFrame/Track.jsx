@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../Components/button/button";
 import { HiOutlineCamera } from "react-icons/hi";
 import {
@@ -8,9 +8,27 @@ import {
 } from "./Track.styles";
 import Fab from "../../components/FAB/Fab";
 import TrackFormCard from "../../components/TrackFormCard/TrackFormCard";
-import { Backdrop } from "../../components/TrackFormCard/trackformcard.styles";
+import { onAuthStateChanged } from "firebase/auth";
+import TrackSkeleton from "./TrackSkeleton";
 
 const Track = () => {
+  // setting the state observer
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    // checking the signed in user state
+    onAuthStateChanged(auth, (user) => {
+      if (user && document.readyState === "complete") {
+        setReady(false);
+      } else if (!user) {
+        navigate("/auth");
+      } else {
+        setReady(true);
+      }
+    });
+  }, []);
+
+  // the render section begins here
   return (
     <StyledTrackPage>
       <Typography />
@@ -36,8 +54,8 @@ const Track = () => {
         />
       </ButtonWrapper>
       <TrackFormCard />
-      <Backdrop />
-      <div className="FAB"></div>
+      <TrackSkeleton />
+      {/* {ready && <TrackSkeleton />} */}
     </StyledTrackPage>
   );
 };

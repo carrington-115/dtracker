@@ -24,6 +24,7 @@ import {
   setDone,
 } from "./features/profile/personalInfoSlice";
 import DashboardSkeleton from "./Pages/Dashboard/DashBoardSkeleton";
+import TrackSkeleton from "./Pages/Track WireFrame/TrackSkeleton";
 
 function App() {
   let name = useSelector(selectUserName);
@@ -42,7 +43,7 @@ function App() {
             <Route index element={<Dashboard />} />
           </Route>
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="/dashboard-skeleton" element={<DashboardSkeleton />} />
+          {/* <Route path="/track-skeleton" element={<TrackSkeleton />} /> */}
           <Route path="record" element={<Record />} />
           <Route path="track" element={<Track />} />
           <Route path="notification" element={<Notification />} />

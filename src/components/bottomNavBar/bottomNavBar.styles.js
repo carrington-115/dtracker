@@ -13,7 +13,7 @@ const StyledButtomNav = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #6b766c;
+  background: #b9debb;
   position: fixed;
   bottom: 0;
 `;
@@ -30,10 +30,13 @@ const StyledIcons = styled(NavLink)`
   &.active,
   &:hover {
     .icon-wrapper {
-      background-color: white;
+      background: #233524;
+      svg {
+        color: white;
+      }
     }
     span {
-      color: white;
+      color: #233524;
     }
   }
 

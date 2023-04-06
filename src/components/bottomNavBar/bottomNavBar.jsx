@@ -5,6 +5,8 @@ import { HiOutlineCamera } from "react-icons/hi";
 import { GoRequestChanges } from "react-icons/go";
 import { StyledButtomNav, StyledIcons } from "./bottomNavBar.styles";
 import { useLocation } from "react-router-dom";
+import { SlHome } from "react-icons/sl";
+
 const BottomNavBar = () => {
   let location = useLocation();
   let pageLocation = `${location.pathname}`;
@@ -29,7 +31,8 @@ const BottomNavBar = () => {
       <StyledIconsButton
         link="/dashboard"
         name="Home"
-        icon={<GrHomeRounded length="18.35px" width="16.3px" />}
+        icon={<SlHome length="18.35px" width="16.3px" />}
+        // icon={<GrHomeRounded length="18.35px" width="16.3px" />}
       />
       <StyledIconsButton
         link="/request"

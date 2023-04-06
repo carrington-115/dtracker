@@ -1,13 +1,12 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import React from "react";
-import BottomNavBar from "../../Components/bottomNavBar/bottomNavBar";
-import TopNavMenu from "../../Components/TopNavMenu/TopNavMenu";
 import { StyledTrackPage, ButtonWrapper } from "./Track.styles";
+import styled from "styled-components";
 
 const TrackSkeleton = () => {
   return (
-    <StyledTrackPage>
+    <TrackSkeletonContainer>
       <TopNavMenu />
       <Skeleton
         color="#D9D9D9"
@@ -29,8 +28,12 @@ const TrackSkeleton = () => {
       </ButtonWrapper>
 
       <BottomNavBar />
-    </StyledTrackPage>
+    </TrackSkeletonContainer>
   );
 };
 
 export default TrackSkeleton;
+
+const TrackSkeletonContainer = styled(StyledTrackPage)`
+  position: fixed;
+`;
