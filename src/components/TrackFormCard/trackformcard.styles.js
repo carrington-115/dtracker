@@ -218,17 +218,4 @@ const TrackFormCardContainer = styled.div`
   }
 `;
 
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vw;
-  z-index: 5;
-  background-color: black;
-  background: rgba(0, 0, 0, 0.5);
-`;
-
-export { Backdrop, TrackFormCardContainer };
+export { TrackFormCardContainer };

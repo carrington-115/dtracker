@@ -64,12 +64,14 @@ const Dashboard = () => {
           variance="contained"
           startIcon={<HiOutlineCamera size={24} color="#fff" />}
           color="#226E27"
+          setFuncAction={() => navigate("/track")}
         />
         <Button
           name="Start a request"
           variance="contained"
           startIcon={<GoRequestChanges size={24} color="#fff" />}
           color="#4D724F"
+          setFuncAction={() => navigate("/request")}
         />
       </ButtonWrapper>
 
@@ -82,6 +84,7 @@ const Dashboard = () => {
 };
 
 const Profile = ({ profileImage, name }) => {
+  let navigate = useNavigate();
   return (
     <ProfileWarpper>
       <div className="image">
@@ -93,7 +96,7 @@ const Profile = ({ profileImage, name }) => {
           <p className="profile-title">You are now a DTracker</p>
         </div>
         <div className="profile-button-container">
-          <button>View your record</button>
+          <button onClick={() => navigate("/record")}>View your record</button>
         </div>
       </div>
     </ProfileWarpper>
