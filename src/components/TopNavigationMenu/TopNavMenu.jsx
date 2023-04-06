@@ -75,25 +75,53 @@ function TopNavMenu() {
           </div>
         </div>
         <div className="menu-links">
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/dashboard"
+            className="nav-page-links"
+          >
             <GrHomeRounded /> <span>Dashboard</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/track"
+            className="nav-page-links"
+          >
             <HiOutlineCamera /> <span>Track</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/request"
+            className="nav-page-links"
+          >
             <GoRequestChanges /> <span>Requests</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/records"
+            className="nav-page-links"
+          >
             <AiOutlineFolder /> <span>Records</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/feedback"
+            className="nav-page-links"
+          >
             <RiFeedbackLine /> <span>Feedback</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/notifications"
+            className="nav-page-links"
+          >
             <IoMdNotificationsOutline /> <span>Notifications</span>
           </NavPageLinks>
-          <NavPageLinks to="/" className="nav-page-links">
+          <NavPageLinks
+            onClick={() => setShowBar(false)}
+            to="/help"
+            className="nav-page-links"
+          >
             <FiHelpCircle /> <span>Help</span>
           </NavPageLinks>
         </div>

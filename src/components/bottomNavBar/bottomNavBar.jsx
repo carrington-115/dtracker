@@ -27,18 +27,22 @@ const BottomNavBar = () => {
   return (
     <StyledButtomNav displayMenu={showMenu}>
       <StyledIconsButton
+        link="/dashboard"
         name="Home"
         icon={<GrHomeRounded length="18.35px" width="16.3px" />}
       />
       <StyledIconsButton
+        link="/request"
         name="Request"
         icon={<GoRequestChanges length="18.35px" width="16.3px" />}
       />
       <StyledIconsButton
+        link="track"
         name="Track"
         icon={<HiOutlineCamera length="18.35px" width="16.3px" />}
       />
       <StyledIconsButton
+        link="/records"
         name="Records"
         icon={<AiOutlineFolder length="18.35px" width="16.3px" />}
       />
@@ -46,9 +50,9 @@ const BottomNavBar = () => {
   );
 };
 
-const StyledIconsButton = ({ name, icon }) => {
+const StyledIconsButton = ({ name, icon, link }) => {
   return (
-    <StyledIcons className="icon">
+    <StyledIcons to={link} className="icon">
       <div className="icon-wrapper">{icon}</div>
       <span>{name}</span>
     </StyledIcons>

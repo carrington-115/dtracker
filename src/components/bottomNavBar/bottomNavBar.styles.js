@@ -1,11 +1,12 @@
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
 const StyledButtomNav = styled.div`
   box-sizing: border-box;
   width: 100%;
   display: ${(props) => (props.displayMenu ? "flex" : "none")};
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 5%;
   padding: 20px 4px;
   position: fixed;
   z-index: 10;
@@ -17,13 +18,16 @@ const StyledButtomNav = styled.div`
   bottom: 0;
 `;
 
-const StyledIcons = styled.div`
+const StyledIcons = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
+  &.active,
   &:hover {
     .icon-wrapper {
       background-color: white;
