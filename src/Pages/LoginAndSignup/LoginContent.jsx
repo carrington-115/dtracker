@@ -26,6 +26,11 @@ function LoginContent() {
   const [checkInfo, setCheckInfo] = useState(false); // checking if the information has been entered
   const [errorCard, setErrorCard] = useState(false); // checking if a field has not been entered
 
+  // firebase and the navigation variables
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -36,13 +41,10 @@ function LoginContent() {
     });
     if (email === "" || password === "") {
       setCheckInfo(false);
+    } else {
+      setCheckInfo(true);
     }
   });
-
-  // firebase and the navigation variables
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  let navigate = useNavigate();
 
   // function to handle the sign-in
   function handleSignIn() {

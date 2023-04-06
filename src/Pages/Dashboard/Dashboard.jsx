@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/button/button";
 import profileImage from "../../assets/profile.png";
 import { HiOutlineCamera } from "react-icons/hi";
 import { GoRequestChanges } from "react-icons/go";
-import { TiTick } from "react-icons/ti";
-import { AiFillWarning } from "react-icons/ai";
 import {
   ProfileWarpper,
   DashboardWrapper,
@@ -12,15 +10,53 @@ import {
   ButtonWrapper,
   TypographyStyle,
 } from "./Dashboard.styles";
+import DashBoardSkeleton from "./DashBoardSkeleton";
 import Fab from "../../components/FAB/Fab";
-import ApprovalCard from "../../components/ApprovalandErrorCard/ApprovalCard";
-import ErrorCards from "../../components/ApprovalandErrorCard/ErrorCards";
+
+// importing firebase functions and objects
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, firestoreDatabase } from "../../Firebase/Firebase.config";
+import { getDoc, doc, collection, onSnapshot } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const [ready, setReady] = useState(true);
+  const [name, setName] = useState("");
+
+  // the navigation object from 'react-router-dom
+  let navigate = useNavigate();
+
+  // initializing the useEffect
+  // async function testGet(id) {
+  //   let locationRef = doc(firestoreDatabase, "profile", `${id}`);
+  //   let profileData = await getDoc(locationRef);
+  //   return profileData.data();
+  // }
+
+  useEffect(() => {
+    // checking the signed in user state
+    onAuthStateChanged(auth, (user) => {
+      if (user && document.readyState === "complete") {
+        setReady(false);
+        // pulling the user data from firebase
+        let locationRef = doc(firestoreDatabase, "profile", `${user.uid}`);
+        onSnapshot(locationRef, (data) => {
+          let received = data.data();
+          console.log(received);
+          setName(received.username);
+        });
+      } else if (!user) {
+        navigate("/auth");
+      } else {
+        setReady(true);
+      }
+    });
+  }, []);
+
   return (
     <DashboardWrapper>
       <Header />
-      <Profile profileImage={profileImage} name="John Doe" />
+      <Profile profileImage={profileImage} name={name} />
 
       <ButtonWrapper>
         <Button
@@ -39,12 +75,8 @@ const Dashboard = () => {
 
       <Typography />
       <Fab />
-      <ErrorCards
-        messageIcon={<AiFillWarning />}
-        message="Are you sure you want to delete this record?"
-        firstButtonName="Yes delete this record"
-        secondButtonName="Cancel"
-      />
+
+      {ready && <DashBoardSkeleton />}
     </DashboardWrapper>
   );
 };

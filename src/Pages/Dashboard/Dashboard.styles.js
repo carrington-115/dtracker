@@ -8,6 +8,7 @@ const ProfileWarpper = styled.div`
   /* gap: 20px; */
   justify-content: space-between;
   padding: 20px 16px;
+
   .image {
     width: 30vw;
     img {

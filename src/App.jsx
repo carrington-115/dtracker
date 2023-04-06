@@ -23,6 +23,7 @@ import {
   selectPhoneNumber,
   setDone,
 } from "./features/profile/personalInfoSlice";
+import DashboardSkeleton from "./Pages/Dashboard/DashBoardSkeleton";
 
 function App() {
   let name = useSelector(selectUserName);
@@ -41,6 +42,7 @@ function App() {
             <Route index element={<Dashboard />} />
           </Route>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="/dashboard-skeleton" element={<DashboardSkeleton />} />
           <Route path="record" element={<Record />} />
           <Route path="track" element={<Track />} />
           <Route path="notification" element={<Notification />} />
