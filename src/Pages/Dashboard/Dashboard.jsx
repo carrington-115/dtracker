@@ -16,7 +16,7 @@ import Fab from "../../components/FAB/Fab";
 // importing firebase functions and objects
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, firestoreDatabase } from "../../Firebase/Firebase.config";
-import { getDoc, doc, collection, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {

@@ -10,10 +10,13 @@ import Fab from "../../components/FAB/Fab";
 import TrackFormCard from "../../components/TrackFormCard/TrackFormCard";
 import { onAuthStateChanged } from "firebase/auth";
 import TrackSkeleton from "./TrackSkeleton";
+import { auth } from "../../Firebase/Firebase.config";
 
+// the react function
 const Track = () => {
   // setting the state observer
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(true);
+  const [formCard, setFormCard] = useState(false);
 
   useEffect(() => {
     // checking the signed in user state
@@ -26,11 +29,17 @@ const Track = () => {
         setReady(true);
       }
     });
-  }, []);
+  });
+
+  const handleShowCard = () => {
+    setFormCard(true);
+  };
 
   // the render section begins here
   return (
     <StyledTrackPage>
+      {ready && <TrackSkeleton />}
+
       <Typography />
       <ButtonWrapper>
         <Button
@@ -38,12 +47,14 @@ const Track = () => {
           variance="contained"
           startIcon={<HiOutlineCamera size={24} color="#fff" />}
           color="#226E27"
+          setFuncAction={handleShowCard}
         />
         <Button
           name="Track community waste"
           variance="contained"
           startIcon={<HiOutlineCamera size={24} color="#fff" />}
           color="#226E27"
+          setFuncAction={handleShowCard}
         />
 
         <Button
@@ -51,11 +62,13 @@ const Track = () => {
           variance="contained"
           startIcon={<HiOutlineCamera size={24} color="#fff" />}
           color="#226E27"
+          setFuncAction={handleShowCard}
         />
       </ButtonWrapper>
-      <TrackFormCard />
-      <TrackSkeleton />
-      {/* {ready && <TrackSkeleton />} */}
+      <TrackFormCard
+        show={formCard}
+        callCloseFunction={() => setFormCard(false)}
+      />
     </StyledTrackPage>
   );
 };

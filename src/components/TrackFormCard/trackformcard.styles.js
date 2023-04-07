@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const TrackFormCardContainer = styled.div`
   position: fixed;
-  z-index: 30;
+  z-index: 40;
   top: 5%;
   bottom: 5%;
   right: 5%;
