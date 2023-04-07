@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import "./App.css";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -23,8 +22,6 @@ import {
   selectPhoneNumber,
   setDone,
 } from "./features/profile/personalInfoSlice";
-import DashboardSkeleton from "./Pages/Dashboard/DashBoardSkeleton";
-import TrackSkeleton from "./Pages/Track WireFrame/TrackSkeleton";
 
 function App() {
   let name = useSelector(selectUserName);
@@ -43,7 +40,6 @@ function App() {
             <Route index element={<Dashboard />} />
           </Route>
           <Route path="dashboard" element={<Dashboard />} />
-          {/* <Route path="/track-skeleton" element={<TrackSkeleton />} /> */}
           <Route path="record" element={<Record />} />
           <Route path="track" element={<Track />} />
           <Route path="notification" element={<Notification />} />
@@ -66,7 +62,7 @@ function App() {
 export default App;
 
 const WelcomeBar = styled.div`
-  @media (min-width: 600px) {
+  @media (min-width: 700px) {
     display: none;
   }
   display: flex;

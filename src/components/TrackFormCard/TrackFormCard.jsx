@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TrackFormCardContainer } from "./trackformcard.styles";
 import dtracker_logo from "../../assets/logo.svg";
 import ExtendedFab from "../FAB/ExtendedFab";
@@ -9,10 +9,10 @@ import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
 
 // the react function
-function TrackFormCard() {
+function TrackFormCard(props) {
   return (
-    <MainContainer>
-      <Backdrop />
+    <MainContainer show={props.show}>
+      <Backdrop onClick={props.callCloseFunction} />
       <TrackFormCardContainer>
         <div className="logo">
           <img src={dtracker_logo} />
@@ -46,7 +46,7 @@ function TrackFormCard() {
             color="#226E27"
             name="Approve and Proceed"
           />
-          <div className="cancel-btn">
+          <div className="cancel-btn" onClick={props.callCloseFunction}>
             <div className="icon">
               <CgClose />
             </div>
@@ -61,7 +61,7 @@ function TrackFormCard() {
             </div>
           </div>
         </div>
-        <div className="close-card-btn">
+        <div className="close-card-btn" onClick={props.callCloseFunction}>
           <CgClose />
         </div>
       </TrackFormCardContainer>
@@ -72,7 +72,10 @@ function TrackFormCard() {
 export default TrackFormCard;
 
 const MainContainer = styled.div`
-  position: fixed;
+  display: ${(props) => (props.show ? "block" : "none")};
+  /* display: flex; */
+  position: absolute;
+  z-index: 30;
   top: 0;
   right: 0;
   left: 0;
@@ -86,7 +89,7 @@ const Backdrop = styled.div`
   left: 0;
   width: 100%;
   min-height: 100vw;
-  z-index: 5;
+  z-index: 20;
   background-color: black;
   background: rgba(0, 0, 0, 0.5);
 `;

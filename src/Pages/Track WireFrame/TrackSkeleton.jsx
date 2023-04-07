@@ -7,12 +7,11 @@ import styled from "styled-components";
 const TrackSkeleton = () => {
   return (
     <TrackSkeletonContainer>
-      <TopNavMenu />
       <Skeleton
         color="#D9D9D9"
         style={{ marginBottom: "5px" }}
         height={30}
-        width={358}
+        width={250}
         borderRadius={50}
         count={3}
       />
@@ -21,13 +20,11 @@ const TrackSkeleton = () => {
           color="#D9D9D9"
           style={{ marginBottom: "25px" }}
           height={60}
-          width={358}
+          width={280}
           borderRadius={50}
           count={3}
         />
       </ButtonWrapper>
-
-      <BottomNavBar />
     </TrackSkeletonContainer>
   );
 };
@@ -36,4 +33,11 @@ export default TrackSkeleton;
 
 const TrackSkeletonContainer = styled(StyledTrackPage)`
   position: fixed;
+  max-width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 15%;
+  margin-top: 1cm;
 `;
