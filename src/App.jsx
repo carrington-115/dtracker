@@ -17,19 +17,16 @@ import Record from "./Pages/Records/Record";
 import Track from "./Pages/Track WireFrame/Track";
 import Notification from "./Pages/Notification/Notification";
 import { useSelector } from "react-redux";
-import {
-  selectUserName,
-  selectPhoneNumber,
-  setDone,
-} from "./features/profile/personalInfoSlice";
 
 function App() {
-  let name = useSelector(selectUserName);
-  let number = useSelector(selectPhoneNumber);
-  let done = useSelector(setDone);
+  navigator.mediaDevices
+    .enumerateDevices()
+    .then((devices) =>
+      devices.forEach((device) =>
+        console.log(`${device.kind}: ${device.label} id=${device.deviceId}`)
+      )
+    );
 
-  console.log(`done: ${done}`);
-  console.log(`name: ${name} and number: ${number}`);
   return (
     <WelcomeBar className="App">
       <Router>

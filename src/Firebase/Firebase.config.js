@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,3 +27,10 @@ const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
 export const firestoreDatabase = getFirestore(app);
+export const storage = getStorage(app);
+
+// to use this API from firebase storage
+// initialization ====> let storageBucket = getStorage(app);
+// the next step is to get a reference like where to store the file we're sending to firebase storage
+// import {ref}
+// ====> let fileStorageRef =
