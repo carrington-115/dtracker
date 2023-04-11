@@ -19,14 +19,6 @@ import Notification from "./Pages/Notification/Notification";
 import { useSelector } from "react-redux";
 
 function App() {
-  navigator.mediaDevices
-    .enumerateDevices()
-    .then((devices) =>
-      devices.forEach((device) =>
-        console.log(`${device.kind}: ${device.label} id=${device.deviceId}`)
-      )
-    );
-
   return (
     <WelcomeBar className="App">
       <Router>
