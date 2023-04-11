@@ -7,9 +7,11 @@ import { TfiLocationPin } from "react-icons/tfi";
 import Button from "../button/button";
 import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
+import Camera from "../Camera/Camera";
 
 // the react function
 function TrackFormCard(props) {
+  const [openCamera, setOpenCamera] = useState(false); // setting the open camera state
   return (
     <MainContainer show={props.show}>
       <Backdrop onClick={props.callCloseFunction} />
@@ -33,7 +35,10 @@ function TrackFormCard(props) {
           </div>
         </div>
         <div className="img-btn">
-          <ExtendedFab />
+          <ExtendedFab
+            text="Take an Image"
+            fabFunction={() => setOpenCamera(true)}
+          />
         </div>
         <div className="comments">
           <textarea placeholder="Comments" rows="5" />
@@ -64,6 +69,7 @@ function TrackFormCard(props) {
         <div className="close-card-btn" onClick={props.callCloseFunction}>
           <CgClose />
         </div>
+        <Camera showCamera={openCamera} />
       </TrackFormCardContainer>
     </MainContainer>
   );

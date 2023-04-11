@@ -32,6 +32,7 @@ const EFabContainer = styled.div`
   background: #4d724f;
   padding: 21px;
   width: fit-content;
+  cursor: pointer;
   .icon {
     width: 33px;
     height: 33px;

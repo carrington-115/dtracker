@@ -2,13 +2,13 @@ import React from "react";
 import { BiCamera } from "react-icons/bi";
 import { EFabContainer } from "./Fab.styles";
 
-function ExtendedFab() {
+function ExtendedFab({ fabFunction, text }) {
   return (
-    <EFabContainer>
+    <EFabContainer onClick={fabFunction}>
       <div className="icon">
         <BiCamera />
       </div>
-      <p>Take an Image</p>
+      <p>{text}</p>
     </EFabContainer>
   );
 }
