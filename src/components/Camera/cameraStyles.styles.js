@@ -10,6 +10,7 @@ export const Container = styled.div`
   width: 100vw;
   z-index: 5;
   background-color: white;
+  display: ${(props) => (props.active ? "block" : "none")};
   .camera,
   .picture-shot {
     position: fixed;
@@ -30,7 +31,6 @@ export const Container = styled.div`
       canvas {
         width: 100%;
         height: 100%;
-        /* background-color: red; */
       }
     }
     .camera-navigation-pane,
@@ -48,16 +48,21 @@ export const Container = styled.div`
         align-items: center;
 
         .icon {
-          width: 48px;
-          height: 48px;
           display: flex;
           justify-content: center;
           align-items: center;
           cursor: pointer;
+          /* border: 1px solid white; */
+          padding: 10px;
+          border-radius: 50%;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+          }
           svg,
           img {
-            width: 100%;
-            height: 100%;
+            width: 48px;
+            height: 48px;
+
             fill: white;
             outline: white;
             color: white;
@@ -107,12 +112,11 @@ export const Container = styled.div`
     left: 0;
     bottom: 0;
     z-index: ${(props) => {
-      props.show ? "20" : "5";
+      props.show ? "20" : "0";
     }};
-    /* background-color: white; */
     .canvas-div {
-      z-index: 30;
-      background-color: red;
+      canvas {
+      }
     }
     .canvas-navigation-pane {
       nav {
@@ -122,8 +126,9 @@ export const Container = styled.div`
             .small-canvas {
               width: 100%;
               height: 100%;
-              background-color: white;
+              /* background-color: white; */
               border-radius: 50%;
+              border: 1px solid white;
             }
           }
         }

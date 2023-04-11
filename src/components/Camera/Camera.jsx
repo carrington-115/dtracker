@@ -1,38 +1,50 @@
 import React, { useState, useEffect } from "react";
-import { callCamera } from "./cameraFunction";
 import approve from "../../assets/add_task.svg";
 import { Container } from "./cameraStyles.styles";
+// import { callCamera } from "./cameraFunction";
 import styled from "styled-components";
 import { MdFlipCameraAndroid, MdOutlineCamera } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import Webcam from "webcam-easy";
+
 function Camera(props) {
   const [cameraState, setCameraState] = useState(false); // setting the camera on state
-  const [snapState, setSnapState] = useState(true); // setting the snap state
+  const [snapState, setSnapState] = useState(false); // setting the snap state
   const [showCanvas, setShowCanvas] = useState(false);
 
   // getting the camera components ids
   let videoElement = document.getElementById("video-element");
   let canvasElement = document.getElementById("canvas-element");
-  let picture; // the container to store the picture
+
+  // the webcam start function
+  const handleWebCamStart = async () => {
+    let webcam = new Webcam(videoElement, "user", canvasElement);
+    await webcam.start();
+  };
+
+  // the webcam snap function
+  const handleSnapPicture = (pic) => {
+    let webcam = new Webcam(videoElement, "user", canvasElement);
+    setSnapState(true);
+    pic = webcam.snap();
+    return pic;
+  };
+
+  // the stop function
+  const handleStopCamera = () => {
+    let webcam = new Webcam(videoElement, "user", canvasElement);
+    webcam.stop();
+  };
 
   useEffect(() => {
     if (props.showCamera === true) {
-      setCameraState(true);
-      callCamera(videoElement, canvasElement, cameraState, snapState, picture);
-    } else {
-      setCameraState(false);
+      handleWebCamStart();
     }
   });
 
-  const handleSnapPicture = () => {
-    setSnapState(true);
-    setShowCanvas(true);
-    console.log(`${showCanvas} ${snapState}`);
-  };
-
   return (
-    <Container show={showCanvas}>
+    <Container show={snapState} active={props.showCamera}>
       <div className="camera">
         <div className="vid-div">
           <video id="video-element"></video>
@@ -58,7 +70,6 @@ function Camera(props) {
       <div className="picture-shot" show={showCanvas}>
         <div className="canvas-div" show={showCanvas}>
           <canvas id="canvas-element"></canvas>
-          new
         </div>
         <div className="canvas-navigation-pane">
           <nav>
