@@ -15,10 +15,10 @@ const TrackSkeleton = () => {
         borderRadius={50}
         count={3}
       />
-      <ButtonWrapper style={{ margin: "55px 0" }}>
+      <ButtonWrapper style={{ margin: "10px 0 25px 0" }}>
         <Skeleton
           color="#D9D9D9"
-          style={{ marginBottom: "25px" }}
+          style={{ marginBottom: "10px" }}
           height={60}
           width={280}
           borderRadius={50}
@@ -34,10 +34,12 @@ export default TrackSkeleton;
 const TrackSkeletonContainer = styled(StyledTrackPage)`
   position: fixed;
   max-width: 100vw;
-  height: 100vh;
+  height: 65vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 15%;
-  margin-top: 1cm;
+  top: 0;
+  margin-top: 2cm;
+  background-color: white;
+  padding: 0 2cm;
 `;
