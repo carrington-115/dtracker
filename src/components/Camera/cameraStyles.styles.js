@@ -123,6 +123,9 @@ export const Container = styled.div`
         .outer-circle {
           .inner-circle {
             background-color: transparent;
+            &:hover {
+              background-color: transparent;
+            }
             .small-canvas {
               width: 100%;
               height: 100%;

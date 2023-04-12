@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import approve from "../../assets/add_task.svg";
 import { Container } from "./cameraStyles.styles";
-// import { callCamera } from "./cameraFunction";
-import styled from "styled-components";
 import { MdFlipCameraAndroid, MdOutlineCamera } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
 import { BiDotsVerticalRounded } from "react-icons/bi";
@@ -12,6 +10,7 @@ function Camera(props) {
   const [cameraState, setCameraState] = useState(false); // setting the camera on state
   const [snapState, setSnapState] = useState(false); // setting the snap state
   const [showCanvas, setShowCanvas] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
 
   // getting the camera components ids
   let videoElement = document.getElementById("video-element");
@@ -24,11 +23,11 @@ function Camera(props) {
   };
 
   // the webcam snap function
-  const handleSnapPicture = (pic) => {
+  const handleSnapPicture = () => {
+    setSnapState(true); // set the snap state true
     let webcam = new Webcam(videoElement, "user", canvasElement);
-    setSnapState(true);
-    pic = webcam.snap();
-    return pic;
+    let picture = webcam.snap();
+    return picture;
   };
 
   // the stop function
@@ -37,9 +36,22 @@ function Camera(props) {
     webcam.stop();
   };
 
+  // handle camera flip function
+  const handleFlipCamera = () => {
+    let webcam = new Webcam(videoElement, "user", canvasElement);
+    webcam.flip();
+  };
+
   useEffect(() => {
     if (props.showCamera === true) {
       handleWebCamStart();
+      if (snapState === true) {
+        let url = handleSnapPicture();
+        setImgUrl(url);
+        console.log(imgUrl);
+      } else {
+        console.log("no image has been taken");
+      }
     }
   });
 
@@ -78,10 +90,10 @@ function Camera(props) {
             </div>
             <div className="outer-circle">
               <div className="inner-circle" show={showCanvas}>
-                <canvas className="small-canvas" id="canvas-element"></canvas>
+                <img className="small-canvas" src={imgUrl} />
               </div>
             </div>
-            <div className="icon">
+            <div className="icon" onClick={() => setSnapState(false)}>
               <ImCancelCircle />
             </div>
           </nav>
