@@ -53,7 +53,7 @@ function Camera(props) {
         console.log("no image has been taken");
       }
     }
-  });
+  }, []);
 
   return (
     <Container show={snapState} active={props.showCamera}>
