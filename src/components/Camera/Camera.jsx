@@ -13,7 +13,6 @@ import Webcam from "webcam-easy";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setInVisible,
-  setVisible,
   selectCameraState,
 } from "../../features/camera/cameraSlice";
 
@@ -21,6 +20,7 @@ function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
   const [showCanvas, setShowCanvas] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+  // const [flipState, setFlipState] = useState(false);
 
   let cameraState = useSelector(selectCameraState); // selecting the camera state
   let dispatch = useDispatch();
@@ -69,7 +69,7 @@ function Camera() {
     } else {
       handleStopCamera();
     }
-  }, [cameraState]);
+  }, [cameraState, snapState]);
 
   return (
     <Container show={snapState} active={cameraState}>
