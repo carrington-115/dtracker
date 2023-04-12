@@ -8,10 +8,18 @@ import Button from "../button/button";
 import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
 import Camera from "../Camera/Camera";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCameraState,
+  setVisible,
+  setInVisible,
+} from "../../features/camera/cameraSlice";
 
 // the react function
 function TrackFormCard(props) {
-  const [openCamera, setOpenCamera] = useState(false); // setting the open camera state
+  // calling the redx objects and functions
+  let dispatch = useDispatch();
+
   return (
     <MainContainer show={props.show}>
       <Backdrop onClick={props.callCloseFunction} />
@@ -37,7 +45,7 @@ function TrackFormCard(props) {
         <div className="img-btn">
           <ExtendedFab
             text="Take an Image"
-            fabFunction={() => setOpenCamera(true)}
+            fabFunction={() => dispatch(setVisible())}
           />
         </div>
         <div className="comments">
@@ -69,7 +77,7 @@ function TrackFormCard(props) {
         <div className="close-card-btn" onClick={props.callCloseFunction}>
           <CgClose />
         </div>
-        <Camera showCamera={openCamera} />
+        <Camera />
       </TrackFormCardContainer>
     </MainContainer>
   );

@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
 import approve from "../../assets/add_task.svg";
 import { Container } from "./cameraStyles.styles";
-import { MdFlipCameraAndroid, MdOutlineCamera } from "react-icons/md";
+
+// import the react icons
+import { MdFlipCameraAndroid, MdOutlineCamera, MdClose } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+
+// the webcam api
 import Webcam from "webcam-easy";
 
-function Camera(props) {
-  const [cameraState, setCameraState] = useState(false); // setting the camera on state
+// redux objects and states
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setInVisible,
+  setVisible,
+  selectCameraState,
+} from "../../features/camera/cameraSlice";
+
+function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
   const [showCanvas, setShowCanvas] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+
+  let cameraState = useSelector(selectCameraState); // selecting the camera state
+  let dispatch = useDispatch();
 
   // getting the camera components ids
   let videoElement = document.getElementById("video-element");
@@ -31,9 +44,10 @@ function Camera(props) {
   };
 
   // the stop function
-  const handleStopCamera = () => {
+  const handleStopCamera = async () => {
+    dispatch(setInVisible());
     let webcam = new Webcam(videoElement, "user", canvasElement);
-    webcam.stop();
+    await webcam.stop();
   };
 
   // handle camera flip function
@@ -43,7 +57,7 @@ function Camera(props) {
   };
 
   useEffect(() => {
-    if (props.showCamera === true) {
+    if (cameraState === true) {
       handleWebCamStart();
       if (snapState === true) {
         let url = handleSnapPicture();
@@ -52,18 +66,20 @@ function Camera(props) {
       } else {
         console.log("no image has been taken");
       }
+    } else {
+      handleStopCamera();
     }
-  }, []);
+  }, [cameraState]);
 
   return (
-    <Container show={snapState} active={props.showCamera}>
+    <Container show={snapState} active={cameraState}>
       <div className="camera">
         <div className="vid-div">
           <video id="video-element"></video>
         </div>
         <div className="camera-navigation-pane">
           <nav>
-            <div className="icon">
+            <div className="icon" onClick={handleFlipCamera}>
               <MdFlipCameraAndroid />
             </div>
             <div className="outer-circle" onClick={handleSnapPicture}>
@@ -73,14 +89,14 @@ function Camera(props) {
                 </div>
               </div>
             </div>
-            <div className="icon">
-              <BiDotsVerticalRounded />
+            <div className="icon" onClick={handleStopCamera}>
+              <MdClose />
             </div>
           </nav>
         </div>
       </div>
-      <div className="picture-shot" show={showCanvas}>
-        <div className="canvas-div" show={showCanvas}>
+      <div className="picture-shot" show={snapState}>
+        <div className="canvas-div" show={snapState}>
           <canvas id="canvas-element"></canvas>
         </div>
         <div className="canvas-navigation-pane">
@@ -89,7 +105,7 @@ function Camera(props) {
               <img src={approve} />
             </div>
             <div className="outer-circle">
-              <div className="inner-circle" show={showCanvas}>
+              <div className="inner-circle" show={snapState}>
                 <img className="small-canvas" src={imgUrl} />
               </div>
             </div>
