@@ -1,5 +1,5 @@
 import { storage } from "../../Firebase/Firebase.config";
-import { uploadString, ref } from "firebase/storage";
+import { uploadString, ref, getDownloadURL } from "firebase/storage";
 
 /*
   This function will be used to send the image to the backend
@@ -17,12 +17,17 @@ import { uploadString, ref } from "firebase/storage";
   - user email
 */
 
-export const sendImageToStore = async (email, baseUrl) => {
-  let fileReference = ref(storage, `image/track/${email}`);
+export const sendImageToStore = async (email, baseUrl, id) => {
+  let fileReference = ref(storage, `image/track/${email}/${id}`);
   await uploadString(fileReference, baseUrl, "data_url");
   try {
     console.log("uploaded a data_url");
   } catch (error) {
     console.log(error.message);
   }
+  let imgUrl;
+  getDownloadURL(fileReference).then((url) => {
+    imgUrl = url;
+  });
+  return imgUrl;
 };

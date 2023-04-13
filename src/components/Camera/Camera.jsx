@@ -19,6 +19,7 @@ import {
 
 // firebase imports
 import { auth } from "../../Firebase/Firebase.config";
+import generateUniqueId from "generate-unique-id";
 
 function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
@@ -62,7 +63,12 @@ function Camera() {
 
   const handleApproveSendFile = (imgUrl) => {
     let userEmail = auth.currentUser.email;
-    sendImageToStore(userEmail, imgUrl);
+    const imgId = generateUniqueId({
+      length: 16,
+      useLetters: true,
+      useNumbers: true,
+    }); // the unique id for the image
+    sendImageToStore(userEmail, imgUrl, imgId);
   };
 
   useEffect(() => {
