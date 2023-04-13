@@ -1,33 +1,28 @@
-import Webcam from "webcam-easy";
+import { storage } from "../../Firebase/Firebase.config";
+import { uploadString, ref } from "firebase/storage";
 
-/* what is needed for this function
+/*
+  This function will be used to send the image to the backend
+  with the firebase storage API, we will be able to send this data
+  to the store using the reference of the location of the database
 
- - videoElement is the attribute for the video
- - the second attribute is for the camera for the user
- - the canvasElement is for the photo of the camera
- - the picture variable is for the storing the picture
- - the snapShotState is to verify if the user has snapped
- - the Camera state is to verify if the picture is on.
+  1. Title: Structure of the database
+  images|
+         track|
+              userEmail|
+                      generatedID
 
-
-
+  2. Depencies of the function
+  - reference
+  - user email
 */
-export const callCamera = async (
-  videoElement,
-  canvasElement,
-  cameraState,
-  snapShotState,
-  picture
-) => {
-  const webcam = new Webcam(videoElement, "user", canvasElement);
-  if (cameraState === true) {
-    await webcam.start();
 
-    if (snapShotState === true) {
-      picture = webcam.snap();
-    }
+export const sendImageToStore = async (email, baseUrl) => {
+  let fileReference = ref(storage, `image/track/${email}`);
+  await uploadString(fileReference, baseUrl, "data_url");
+  try {
+    console.log("uploaded a data_url");
+  } catch (error) {
+    console.log(error.message);
   }
-  // else {
-  //   await webcam.stop();
-  // }
 };
