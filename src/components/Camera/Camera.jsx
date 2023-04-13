@@ -5,6 +5,7 @@ import { Container } from "./cameraStyles.styles";
 // import the react icons
 import { MdFlipCameraAndroid, MdOutlineCamera, MdClose } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
+import { sendImageToStore } from "./cameraFunction";
 
 // the webcam api
 import Webcam from "webcam-easy";
@@ -15,6 +16,9 @@ import {
   setInVisible,
   selectCameraState,
 } from "../../features/camera/cameraSlice";
+
+// firebase imports
+import { auth } from "../../Firebase/Firebase.config";
 
 function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
@@ -54,6 +58,11 @@ function Camera() {
   const handleFlipCamera = () => {
     let webcam = new Webcam(videoElement, "user", canvasElement);
     webcam.flip();
+  };
+
+  const handleApproveSendFile = (imgUrl) => {
+    let userEmail = auth.currentUser.email;
+    sendImageToStore(userEmail, imgUrl);
   };
 
   useEffect(() => {
@@ -101,7 +110,7 @@ function Camera() {
         </div>
         <div className="canvas-navigation-pane">
           <nav>
-            <div className="icon">
+            <div className="icon" onClick={handleApproveSendFile(imgUrl)}>
               <img src={approve} />
             </div>
             <div className="outer-circle">
