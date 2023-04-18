@@ -17,17 +17,22 @@ import { uploadString, ref, getDownloadURL } from "firebase/storage";
   - user email
 */
 
-export const sendImageToStore = async (email, baseUrl, id) => {
+export const sendImageToStore = async (
+  email,
+  baseUrl,
+  id,
+  dispatch,
+  dispatchFunc
+) => {
   let fileReference = ref(storage, `image/track/${email}/${id}`);
   await uploadString(fileReference, baseUrl, "data_url");
-  try {
-    console.log("uploaded a data_url");
-  } catch (error) {
-    console.log(error.message);
-  }
-  let imgUrl;
-  getDownloadURL(fileReference).then((url) => {
-    imgUrl = url;
-  });
-  return imgUrl;
+
+  getDownloadURL(fileReference)
+    .then((url) => {
+      console.log(`This is the url: ${url}`);
+      dispatch(dispatchFunc(url));
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };

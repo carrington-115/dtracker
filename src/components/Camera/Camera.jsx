@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import approve from "../../assets/add_task.svg";
 import { Container } from "./cameraStyles.styles";
+import { IoMdWarning } from "react-icons/io";
 
 // import the react icons
 import { MdFlipCameraAndroid, MdOutlineCamera, MdClose } from "react-icons/md";
@@ -17,17 +18,24 @@ import {
   selectCameraState,
 } from "../../features/camera/cameraSlice";
 
+import {
+  getTrackUrl,
+  selectTrackImgUrl,
+} from "../../features/track/trackSlice";
+
 // firebase imports
 import { auth } from "../../Firebase/Firebase.config";
 import generateUniqueId from "generate-unique-id";
+import ApprovalCard from "../ApprovalandErrorCard/ApprovalCard";
 
 function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
-  const [showCanvas, setShowCanvas] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+  const [showCard, setShowCard] = useState(false);
   // const [flipState, setFlipState] = useState(false);
 
   let cameraState = useSelector(selectCameraState); // selecting the camera state
+  let ImageStateUrl = useSelector(selectTrackImgUrl);
   let dispatch = useDispatch();
 
   // getting the camera components ids
@@ -68,7 +76,8 @@ function Camera() {
       useLetters: true,
       useNumbers: true,
     }); // the unique id for the image
-    sendImageToStore(userEmail, imgUrl, imgId);
+    sendImageToStore(userEmail, imgUrl, imgId, dispatch, getTrackUrl);
+    console.log(ImageStateUrl);
   };
 
   useEffect(() => {
@@ -116,7 +125,7 @@ function Camera() {
         </div>
         <div className="canvas-navigation-pane">
           <nav>
-            <div className="icon" onClick={handleApproveSendFile(imgUrl)}>
+            <div className="icon" onClick={() => setShowCard(true)}>
               <img src={approve} />
             </div>
             <div className="outer-circle">
@@ -130,6 +139,15 @@ function Camera() {
           </nav>
         </div>
       </div>
+      <ApprovalCard
+        messageIcon={<IoMdWarning />}
+        message="Approve to Proceed tracking with this image"
+        firstActionButtonName="Approve"
+        secondActionButtonName="Cancel"
+        secondButtonFunc={() => setShowCard(false)}
+        showContainer={showCard}
+        backdropFunc={() => setShowCard(false)}
+      />
     </Container>
   );
 }

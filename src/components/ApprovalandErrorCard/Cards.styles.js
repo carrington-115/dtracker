@@ -12,6 +12,7 @@ const CardContainer = styled.div`
   padding: 32px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  z-index: 20;
   .message-icon-container {
     width: 100%;
     display: flex;
