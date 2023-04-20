@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import approve from "../../assets/add_task.svg";
 import { Container } from "./cameraStyles.styles";
 import { IoMdWarning } from "react-icons/io";
+import { AiOutlineExclamation } from "react-icons/ai";
 
 // import the react icons
 import { MdFlipCameraAndroid, MdOutlineCamera, MdClose } from "react-icons/md";
@@ -16,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setInVisible,
   selectCameraState,
+  setVisible,
 } from "../../features/camera/cameraSlice";
 
 import {
@@ -27,15 +29,15 @@ import {
 import { auth } from "../../Firebase/Firebase.config";
 import generateUniqueId from "generate-unique-id";
 import ApprovalCard from "../ApprovalandErrorCard/ApprovalCard";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
   const [imgUrl, setImgUrl] = useState("");
   const [showCard, setShowCard] = useState(false);
-  // const [flipState, setFlipState] = useState(false);
+  const [imageDone, setImageDone] = useState(false);
 
   let cameraState = useSelector(selectCameraState); // selecting the camera state
-  let ImageStateUrl = useSelector(selectTrackImgUrl);
   let dispatch = useDispatch();
 
   // getting the camera components ids
@@ -45,22 +47,41 @@ function Camera() {
   // the webcam start function
   const handleWebCamStart = async () => {
     let webcam = new Webcam(videoElement, "user", canvasElement);
-    await webcam.start();
+    if (webcam !== undefined) {
+      await webcam.start();
+    }
   };
 
   // the webcam snap function
-  const handleSnapPicture = () => {
+  const handleSnapPicture = async () => {
     setSnapState(true); // set the snap state true
     let webcam = new Webcam(videoElement, "user", canvasElement);
-    let picture = webcam.snap();
-    return picture;
+    if (webcam !== undefined) {
+      let picture = await webcam.snap();
+      setImgUrl(picture);
+      console.log(`img url: ${imgUrl}`);
+    }
+  };
+
+  const handleRetakePicture = () => {
+    setImgUrl("");
+    setSnapState(false);
+  };
+
+  const handleApproveImage = () => {
+    setShowCard(true);
   };
 
   // the stop function
   const handleStopCamera = async () => {
-    dispatch(setInVisible());
     let webcam = new Webcam(videoElement, "user", canvasElement);
-    await webcam.stop();
+    if (webcam !== undefined) {
+      webcam.stop();
+    }
+    setImgUrl("");
+    dispatch(setInVisible());
+    setSnapState(false);
+    setShowCard(false);
   };
 
   // handle camera flip function
@@ -69,31 +90,30 @@ function Camera() {
     webcam.flip();
   };
 
-  const handleApproveSendFile = (imgUrl) => {
+  const handleApproveSendFile = async (imgUrl) => {
+    // dispatch(setTempUrlEmpty());
     let userEmail = auth.currentUser.email;
     const imgId = generateUniqueId({
       length: 16,
       useLetters: true,
       useNumbers: true,
-    }); // the unique id for the image
-    sendImageToStore(userEmail, imgUrl, imgId, dispatch, getTrackUrl);
-    console.log(ImageStateUrl);
+    });
+    await sendImageToStore(userEmail, imgUrl, imgId, dispatch, getTrackUrl); // sends the image to firebase storage
+    setImageDone(true);
+    handleStopCamera();
+  };
+
+  const handleReopenCamera = async () => {
+    await handleWebCamStart();
+    setImageDone(false);
+    dispatch(setVisible());
   };
 
   useEffect(() => {
     if (cameraState === true) {
       handleWebCamStart();
-      if (snapState === true) {
-        let url = handleSnapPicture();
-        setImgUrl(url);
-        console.log(imgUrl);
-      } else {
-        console.log("no image has been taken");
-      }
-    } else {
-      handleStopCamera();
     }
-  }, [cameraState, snapState]);
+  });
 
   return (
     <Container show={snapState} active={cameraState}>
@@ -125,7 +145,7 @@ function Camera() {
         </div>
         <div className="canvas-navigation-pane">
           <nav>
-            <div className="icon" onClick={() => setShowCard(true)}>
+            <div className="icon" onClick={handleApproveImage}>
               <img src={approve} />
             </div>
             <div className="outer-circle">
@@ -133,7 +153,7 @@ function Camera() {
                 <img className="small-canvas" src={imgUrl} />
               </div>
             </div>
-            <div className="icon" onClick={() => setSnapState(false)}>
+            <div className="icon" onClick={handleRetakePicture}>
               <ImCancelCircle />
             </div>
           </nav>
@@ -147,7 +167,19 @@ function Camera() {
         secondButtonFunc={() => setShowCard(false)}
         showContainer={showCard}
         backdropFunc={() => setShowCard(false)}
+        firstButtonFunc={handleApproveSendFile(imgUrl)}
       />
+      <LoadingPage />
+      {/* <ApprovalCard
+        messageIcon={<AiOutlineExclamation />}
+        message="You Track image has been recorded. Continue with the other fields"
+        firstActionButtonName="Continue"
+        secondActionButtonName="Retake image"
+        showContainer={imageDone}
+        backdropFunc={() => setImageDone(false)}
+        firstButtonFunc={() => setImageDone(false)}
+        secondButtonFunc={handleReopenCamera}
+      /> */}
     </Container>
   );
 }
