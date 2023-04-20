@@ -11,6 +11,9 @@ function ApprovalCard({
   secondActionButtonName,
   showContainer,
   backdropFunc,
+  data,
+  comments,
+  location,
 }) {
   return (
     <MainContainer show={showContainer}>
@@ -20,6 +23,8 @@ function ApprovalCard({
         </div>
         <div className="message">
           <p>{message}</p>
+          <p>{data && location}</p>
+          <p>{data && comments}</p>
         </div>
         <div className="btns">
           <button className="first-action-btn" onClick={firstButtonFunc}>

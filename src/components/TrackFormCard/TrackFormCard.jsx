@@ -9,16 +9,49 @@ import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
 import Camera from "../Camera/Camera";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectCameraState,
-  setVisible,
-  setInVisible,
-} from "../../features/camera/cameraSlice";
+import { setVisible } from "../../features/camera/cameraSlice";
+import { selectTrackImgUrl } from "../../features/track/trackSlice";
+
+// import firebase tools
+import { firestoreDatabase, auth } from "../../Firebase/Firebase.config";
+import { addDoc, collection } from "firebase/firestore";
+import ApprovalCard from "../ApprovalandErrorCard/ApprovalCard";
 
 // the react function
 function TrackFormCard(props) {
   // calling the redx objects and functions
   let dispatch = useDispatch();
+  let trackImgurl = useSelector(selectTrackImgUrl);
+  console.log(trackImgurl);
+  // collecting the form data
+  const [showCard, setShowCard] = useState(false);
+  const [location, setLocation] = useState("");
+  const [comments, setComments] = useState("");
+
+  const sendTrackToDB = async (url, wasteLocation, comments) => {
+    let user = auth.currentUser;
+    if (user !== null) {
+      let trackRef = collection(
+        firestoreDatabase,
+        "tracks",
+        "common-tracks",
+        `${user.uid}`
+      );
+      let trackID = trackRef.id;
+      let trackData = {
+        trackImageUrl: url,
+        location: wasteLocation,
+        comments: comments,
+        id: trackID,
+      };
+
+      try {
+        await addDoc(trackRef, trackData);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
 
   return (
     <MainContainer show={props.show}>
@@ -32,7 +65,12 @@ function TrackFormCard(props) {
             <div className="icon">
               <TfiLocationPin />
             </div>
-            <input type="text" placeholder="location" />
+            <input
+              type="text"
+              placeholder="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
           </div>
           <div className="location-btn">
             <button type="button">
@@ -49,7 +87,12 @@ function TrackFormCard(props) {
           />
         </div>
         <div className="comments">
-          <textarea placeholder="Comments" rows="5" />
+          <textarea
+            placeholder="Comments"
+            rows="5"
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+          />
         </div>
         <div className="btns">
           {/* <button>Proceed and Approve</button> */}
@@ -58,6 +101,7 @@ function TrackFormCard(props) {
             borderColor="#226E27"
             color="#226E27"
             name="Approve and Proceed"
+            setFuncAction={() => setShowCard(true)}
           />
           <div className="cancel-btn" onClick={props.callCloseFunction}>
             <div className="icon">
@@ -79,6 +123,19 @@ function TrackFormCard(props) {
         </div>
         <Camera />
       </TrackFormCardContainer>
+      <ApprovalCard
+        messageIcon={<img src={trackImgurl} />}
+        message={<h2>Waste tracking</h2>}
+        showContainer={showCard}
+        data={true}
+        location={`Location: ${location}`}
+        comments={`comments: ${comments}`}
+        firstActionButtonName="Send"
+        secondActionButtonName="Cancel"
+        secondButtonFunc={() => setShowCard(false)}
+        backdropFunc={() => setShowCard(false)}
+        firstButtonFunc={sendTrackToDB(trackImgurl, location, comments)}
+      />
     </MainContainer>
   );
 }
