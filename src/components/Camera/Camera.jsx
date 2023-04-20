@@ -35,7 +35,6 @@ function Camera() {
   const [snapState, setSnapState] = useState(false); // setting the snap state
   const [imgUrl, setImgUrl] = useState("");
   const [showCard, setShowCard] = useState(false);
-  const [imageDone, setImageDone] = useState(false);
 
   let cameraState = useSelector(selectCameraState); // selecting the camera state
   let dispatch = useDispatch();
@@ -99,14 +98,7 @@ function Camera() {
       useNumbers: true,
     });
     await sendImageToStore(userEmail, imgUrl, imgId, dispatch, getTrackUrl); // sends the image to firebase storage
-    setImageDone(true);
     handleStopCamera();
-  };
-
-  const handleReopenCamera = async () => {
-    await handleWebCamStart();
-    setImageDone(false);
-    dispatch(setVisible());
   };
 
   useEffect(() => {
@@ -170,16 +162,6 @@ function Camera() {
         firstButtonFunc={handleApproveSendFile(imgUrl)}
       />
       <LoadingPage />
-      {/* <ApprovalCard
-        messageIcon={<AiOutlineExclamation />}
-        message="You Track image has been recorded. Continue with the other fields"
-        firstActionButtonName="Continue"
-        secondActionButtonName="Retake image"
-        showContainer={imageDone}
-        backdropFunc={() => setImageDone(false)}
-        firstButtonFunc={() => setImageDone(false)}
-        secondButtonFunc={handleReopenCamera}
-      /> */}
     </Container>
   );
 }
