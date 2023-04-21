@@ -7,6 +7,7 @@ export const trackSlice = createSlice({
   },
   reducers: {
     getTrackUrl: (state, action) => {
+      state.trackImageUrl = "";
       state.trackImageUrl += action.payload;
     },
   },

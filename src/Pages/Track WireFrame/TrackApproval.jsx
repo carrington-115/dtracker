@@ -42,10 +42,10 @@ function TrackApproval() {
             <MdZoomOutMap />
           </div>
         </div>
-        <div className="track-image">
+        <div className="track-image" onClick={() => setShowImage(true)}>
           <div className="image">
             <img src={image} />
-            <div className="icon" onClick={() => setShowImage(true)}>
+            <div className="icon">
               <MdZoomOutMap />
             </div>
           </div>
