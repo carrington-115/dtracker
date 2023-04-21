@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "./Request.styles";
 import Button from "../../components/button/button";
 import { TfiLocationPin } from "react-icons/tfi";
 import { BsCamera } from "react-icons/bs";
-import { IoMdClose } from "react-icons/io";
-// import { IoClose } from "react-icons/io";
+import { auth } from "../../Firebase/Firebase.config";
+import { useSelector, useDispatch } from "react-redux";
+import Camera from "../../components/Camera/Camera";
+import { setVisible } from "../../features/camera/cameraSlice";
+import { selectTrackImgUrl } from "../../features/track/trackSlice";
+import ApprovalCard from "../../components/ApprovalandErrorCard/ApprovalCard";
+
 function RequestPage() {
+  const [message, setMessage] = useState("");
+  const [showCard, setShowCard] = useState(false);
+  let dispatch = useDispatch();
+  let trackImageUrl = useSelector(selectTrackImgUrl);
   return (
     <Container>
       <div className="page-heading">
@@ -13,7 +22,12 @@ function RequestPage() {
       </div>
       <div className="form-input">
         <p>What's your request?</p>
-        <textarea rows="10" placeholder="Your Request message" />
+        <textarea
+          rows="10"
+          placeholder="Your Request message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
       </div>
       <div className="tracking-content">
         <p>Do you want to add any other content?</p>
@@ -31,6 +45,7 @@ function RequestPage() {
             variance="contained"
             startIcon={<BsCamera />}
             color="#B9DEBB"
+            setFuncAction={() => dispatch(setVisible())}
           />
         </div>
       </div>
@@ -40,14 +55,21 @@ function RequestPage() {
           textColor="#226E27"
           variance="outlined"
           borderColor="#226E27"
+          setFuncAction={() => setShowCard(true)}
         />
-        <button className="cancel-btn">
-          <div className="icon">
-            <IoMdClose />
-          </div>
-          <p>Cancel</p>
-        </button>
       </div>
+      <Camera />
+      <ApprovalCard
+        messageIcon={<img src={trackImageUrl} />}
+        message={<h2>Send your Request</h2>}
+        showContainer={showCard}
+        data={true}
+        comments={`Message: ${message}`}
+        firstActionButtonName="Send"
+        secondActionButtonName="Cancel"
+        secondButtonFunc={() => setShowCard(false)}
+        backdropFunc={() => setShowCard(false)}
+      />
     </Container>
   );
 }

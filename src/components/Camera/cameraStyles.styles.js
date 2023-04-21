@@ -8,7 +8,7 @@ export const Container = styled.div`
   bottom: 0;
   height: 100vh;
   width: 100vw;
-  z-index: 5;
+  z-index: 30;
   background-color: white;
   display: ${(props) => (props.active ? "block" : "none")};
   .camera,

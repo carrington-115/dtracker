@@ -56,29 +56,6 @@ const Container = styled.div`
     button {
       margin-bottom: 0.5cm;
     }
-    .cancel-btn {
-      display: flex;
-      align-items: center;
-      background-color: transparent;
-      border: none;
-      color: #c64700;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
-      gap: 8px;
-      cursor: pointer;
-      &:hover {
-        font-weight: bold;
-      }
-      .icon {
-        width: 24px;
-        height: 24px;
-        svg {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
   }
 `;
 
