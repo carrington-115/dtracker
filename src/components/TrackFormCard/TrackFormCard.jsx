@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrackFormCardContainer } from "./trackformcard.styles";
 import dtracker_logo from "../../assets/logo.svg";
 import ExtendedFab from "../FAB/ExtendedFab";
@@ -8,6 +8,8 @@ import Button from "../button/button";
 import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
 import Camera from "../Camera/Camera";
+
+// calling on state management tools
 import { useSelector, useDispatch } from "react-redux";
 import { setVisible } from "../../features/camera/cameraSlice";
 import { selectTrackImgUrl } from "../../features/track/trackSlice";
@@ -16,42 +18,63 @@ import { selectTrackImgUrl } from "../../features/track/trackSlice";
 import { firestoreDatabase, auth } from "../../Firebase/Firebase.config";
 import { addDoc, collection } from "firebase/firestore";
 import ApprovalCard from "../ApprovalandErrorCard/ApprovalCard";
+import {
+  addComment,
+  addImageUrl,
+  addLocation,
+  selectComments,
+  selectImage,
+  selectLocation,
+} from "../../features/trackForm/trackFormSlice";
 
 // the react function
 function TrackFormCard(props) {
-  // calling the redx objects and functions
-  let dispatch = useDispatch();
-  let trackImgurl = useSelector(selectTrackImgUrl);
-  console.log(trackImgurl);
   // collecting the form data
   const [showCard, setShowCard] = useState(false);
   const [location, setLocation] = useState("");
   const [comments, setComments] = useState("");
 
-  const sendTrackToDB = async (url, wasteLocation, comments) => {
-    let user = auth.currentUser;
-    if (user !== null) {
-      let trackRef = collection(
-        firestoreDatabase,
-        "tracks",
-        "common-tracks",
-        `${user.uid}`
-      );
-      let trackID = trackRef.id;
-      let trackData = {
-        trackImageUrl: url,
-        location: wasteLocation,
-        comments: comments,
-        id: trackID,
-      };
+  // calling the redx objects and functions, and slices
+  let dispatch = useDispatch();
+  let trackImgurl = useSelector(selectTrackImgUrl);
+  // let cardLocation = useSelector(selectLocation);
+  // let cardImageUrl = useSelector(selectImage);
+  // let cardComment = useSelector(selectComments);
 
-      try {
-        await addDoc(trackRef, trackData);
-      } catch (error) {
-        console.log(error.message);
-      }
+  const sendTrackToState = () => {
+    try {
+      dispatch(addLocation(location));
+      dispatch(addImageUrl(trackImgurl));
+      dispatch(addComment(comments));
+      setShowCard(true);
+    } catch (error) {
+      console.log(error.message);
     }
   };
+
+  const sendTrackToDB = async (url, wasteLocation, wasteComments) => {
+    let user = auth.currentUser;
+    try {
+      if (user != null) {
+        let trackRef = collection(
+          firestoreDatabase,
+          "tracks",
+          "common-tracks",
+          `${user.uid}`
+        );
+        let trackData = {
+          trackUrl: url,
+          trackLocation: wasteLocation,
+          trackComments: wasteComments,
+        };
+        await addDoc(trackRef, trackData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // useEffect(() => {}, []);
 
   return (
     <MainContainer show={props.show}>
@@ -95,13 +118,12 @@ function TrackFormCard(props) {
           />
         </div>
         <div className="btns">
-          {/* <button>Proceed and Approve</button> */}
           <Button
             variance="contained"
             borderColor="#226E27"
             color="#226E27"
             name="Approve and Proceed"
-            setFuncAction={() => setShowCard(true)}
+            setFuncAction={sendTrackToState}
           />
           <div className="cancel-btn" onClick={props.callCloseFunction}>
             <div className="icon">
@@ -134,7 +156,7 @@ function TrackFormCard(props) {
         secondActionButtonName="Cancel"
         secondButtonFunc={() => setShowCard(false)}
         backdropFunc={() => setShowCard(false)}
-        firstButtonFunc={sendTrackToDB(trackImgurl, location, comments)}
+        firstButtonFunc={() => sendTrackToDB(trackImgurl, location, comments)}
       />
     </MainContainer>
   );

@@ -17,8 +17,13 @@ import Record from "./Pages/Records/Record";
 import Track from "./Pages/Track WireFrame/Track";
 import Notification from "./Pages/Notification/Notification";
 import { useSelector } from "react-redux";
+import { selectCameraState } from "./features/camera/cameraSlice";
+import TrackApproval from "./Pages/Track WireFrame/TrackApproval";
 
 function App() {
+  let cameraState = useSelector(selectCameraState);
+  console.log(`camera state: ${cameraState}`);
+
   return (
     <WelcomeBar className="App">
       <Router>
@@ -31,6 +36,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="record" element={<Record />} />
           <Route path="track" element={<Track />} />
+          <Route path="view-track" element={<TrackApproval />} />
           <Route path="notification" element={<Notification />} />
           <Route path="auth" element={<AuthComponent />}>
             <Route index element={<Login />} />
