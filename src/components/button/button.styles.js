@@ -53,6 +53,7 @@ const StyledButtonWrapper = styled.div`
     top: 100.5px;
     border-radius: 72.15908813476562px;
     padding: 14px 35px 14px 23px;
+    box-shadow: none;
   }
 
   .text {
