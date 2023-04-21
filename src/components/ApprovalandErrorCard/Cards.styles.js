@@ -32,6 +32,11 @@ const CardContainer = styled.div`
         height: 48px;
         fill: #226e27;
       }
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+      }
     }
   }
   .message {

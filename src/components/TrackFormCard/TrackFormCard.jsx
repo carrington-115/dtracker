@@ -8,17 +8,68 @@ import Button from "../button/button";
 import swims_logo from "../../assets/logo.png";
 import styled from "styled-components";
 import Camera from "../Camera/Camera";
+
+// calling on state management tools
 import { useSelector, useDispatch } from "react-redux";
+import { setVisible } from "../../features/camera/cameraSlice";
+import { selectTrackImgUrl } from "../../features/track/trackSlice";
+
+// import firebase tools
+import { firestoreDatabase, auth } from "../../Firebase/Firebase.config";
+import { addDoc, collection } from "firebase/firestore";
+import ApprovalCard from "../ApprovalandErrorCard/ApprovalCard";
 import {
-  selectCameraState,
-  setVisible,
-  setInVisible,
-} from "../../features/camera/cameraSlice";
+  addComment,
+  addImageUrl,
+  addLocation,
+} from "../../features/trackForm/trackFormSlice";
+import { useNavigate } from "react-router-dom";
 
 // the react function
 function TrackFormCard(props) {
-  // calling the redx objects and functions
+  // collecting the form data
+  const [showCard, setShowCard] = useState(false);
+  const [location, setLocation] = useState("");
+  const [comments, setComments] = useState("");
+
+  // calling the redx objects and functions, and slices
   let dispatch = useDispatch();
+  let trackImgurl = useSelector(selectTrackImgUrl);
+  let navigate = useNavigate();
+
+  const sendTrackToState = () => {
+    try {
+      dispatch(addLocation(location));
+      dispatch(addImageUrl(trackImgurl));
+      dispatch(addComment(comments));
+      setShowCard(true);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const sendTrackToDB = async (url, wasteLocation, wasteComments) => {
+    let user = auth.currentUser;
+    try {
+      if (user != null) {
+        let trackRef = collection(
+          firestoreDatabase,
+          "tracks",
+          "common-tracks",
+          `${user.uid}`
+        );
+        let trackData = {
+          trackUrl: url,
+          trackLocation: wasteLocation,
+          trackComments: wasteComments,
+        };
+        await addDoc(trackRef, trackData);
+        navigate("/view-track");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <MainContainer show={props.show}>
@@ -32,7 +83,12 @@ function TrackFormCard(props) {
             <div className="icon">
               <TfiLocationPin />
             </div>
-            <input type="text" placeholder="location" />
+            <input
+              type="text"
+              placeholder="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
           </div>
           <div className="location-btn">
             <button type="button">
@@ -49,15 +105,20 @@ function TrackFormCard(props) {
           />
         </div>
         <div className="comments">
-          <textarea placeholder="Comments" rows="5" />
+          <textarea
+            placeholder="Comments"
+            rows="5"
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+          />
         </div>
         <div className="btns">
-          {/* <button>Proceed and Approve</button> */}
           <Button
             variance="contained"
             borderColor="#226E27"
             color="#226E27"
             name="Approve and Proceed"
+            setFuncAction={sendTrackToState}
           />
           <div className="cancel-btn" onClick={props.callCloseFunction}>
             <div className="icon">
@@ -79,6 +140,19 @@ function TrackFormCard(props) {
         </div>
         <Camera />
       </TrackFormCardContainer>
+      <ApprovalCard
+        messageIcon={<img src={trackImgurl} />}
+        message={<h2>Waste tracking</h2>}
+        showContainer={showCard}
+        data={true}
+        location={`Location: ${location}`}
+        comments={`comments: ${comments}`}
+        firstActionButtonName="Send"
+        secondActionButtonName="Cancel"
+        secondButtonFunc={() => setShowCard(false)}
+        backdropFunc={() => setShowCard(false)}
+        firstButtonFunc={() => sendTrackToDB(trackImgurl, location, comments)}
+      />
     </MainContainer>
   );
 }
