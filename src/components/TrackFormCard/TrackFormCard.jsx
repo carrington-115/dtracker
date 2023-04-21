@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TrackFormCardContainer } from "./trackformcard.styles";
 import dtracker_logo from "../../assets/logo.svg";
 import ExtendedFab from "../FAB/ExtendedFab";
@@ -22,10 +22,8 @@ import {
   addComment,
   addImageUrl,
   addLocation,
-  selectComments,
-  selectImage,
-  selectLocation,
 } from "../../features/trackForm/trackFormSlice";
+import { useNavigate } from "react-router-dom";
 
 // the react function
 function TrackFormCard(props) {
@@ -37,9 +35,7 @@ function TrackFormCard(props) {
   // calling the redx objects and functions, and slices
   let dispatch = useDispatch();
   let trackImgurl = useSelector(selectTrackImgUrl);
-  // let cardLocation = useSelector(selectLocation);
-  // let cardImageUrl = useSelector(selectImage);
-  // let cardComment = useSelector(selectComments);
+  let navigate = useNavigate();
 
   const sendTrackToState = () => {
     try {
@@ -68,13 +64,12 @@ function TrackFormCard(props) {
           trackComments: wasteComments,
         };
         await addDoc(trackRef, trackData);
+        navigate("/view-track");
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-  // useEffect(() => {}, []);
 
   return (
     <MainContainer show={props.show}>

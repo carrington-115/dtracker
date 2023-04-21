@@ -58,6 +58,12 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        position: relative;
+        img {
+          width: 98%;
+          height: 98%;
+          border-radius: 50%;
+        }
         &:hover {
           .icon {
             padding: 2px;
@@ -74,6 +80,7 @@ const Container = styled.div`
           background-color: rgba(0, 0, 0, 0.3);
           border-radius: 50%;
           cursor: pointer;
+          position: absolute;
           &:hover {
             padding: 2px;
             background-color: black;
@@ -129,6 +136,7 @@ const Container = styled.div`
       color: #226e27;
     }
   }
+  
 `;
 
 export { Container };

@@ -9,12 +9,15 @@ export const trackFormSlice = createSlice({
   },
   reducers: {
     addImageUrl: (state, action) => {
+      // state.imageUrl = "";
       state.imageUrl += action.payload;
     },
     addLocation: (state, action) => {
+      // state.location = "";
       state.location += action.payload;
     },
     addComment: (state, action) => {
+      // state.comments = "";
       state.comments += action.payload;
     },
   },
