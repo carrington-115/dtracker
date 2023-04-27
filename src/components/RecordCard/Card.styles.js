@@ -108,4 +108,46 @@ const NotificationCardContainer = styled(CardContainer)`
   }
 `;
 
-export { CardContainer, NotificationCardContainer };
+const NotificationCardSkeletonContainer = styled(CardContainer)`
+  background-color: white;
+  color: black;
+  width: 90%;
+  display: flex;
+  padding: 0 1rem;
+  justify-content: center;
+  gap: 2rem;
+  cursor: pointer;
+
+  .img-container {
+    width: 20%;
+    padding: 0.4cm;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 80%;
+      height: 80%;
+    }
+  }
+  .text-content {
+    color: black;
+    width: 60%;
+    .alt-components {
+      display: flex;
+      flex-direction: column;
+
+      .second {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  }
+`;
+
+export {
+  CardContainer,
+  NotificationCardContainer,
+  NotificationCardSkeletonContainer,
+};

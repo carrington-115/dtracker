@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { selectCameraState } from "./features/camera/cameraSlice";
 import TrackApproval from "./Pages/Track WireFrame/TrackApproval";
 import RequestPage from "./Pages/Request/RequestPage";
+import NotificationSkeleton from "./Pages/Notification/NotificationSkeleton";
 
 function App() {
   let cameraState = useSelector(selectCameraState);
@@ -39,6 +40,7 @@ function App() {
           <Route path="track" element={<Track />} />
           <Route path="view-track" element={<TrackApproval />} />
           <Route path="notification" element={<Notification />} />
+          <Route path="notif" element={<NotificationSkeleton />} />
           <Route path="request" element={<RequestPage />} />
           <Route path="auth" element={<AuthComponent />}>
             <Route index element={<Login />} />
